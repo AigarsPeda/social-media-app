@@ -3,13 +3,15 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 
+console.log(process.env.NODE_ENV);
+
 module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "bundle.js",
+    filename: "bundle.js"
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   module: {
     rules: [
@@ -18,50 +20,50 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
-          },
-        ],
+            loader: "babel-loader"
+          }
+        ]
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
-          },
-        ],
+            loader: "html-loader"
+          }
+        ]
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: "file-loader",
-          },
-        ],
+            loader: "file-loader"
+          }
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      },
-    ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+      }
+    ]
   },
-
-  plugins: [
-    new HtmlPlugin({
-      filename: "index.html",
-      template: "./src/index.html",
-    }),
-    new MiniCssExtractPlugin(),
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
-    }),
-  ],
-
   devServer: {
     // This is necessary for react-route-dom to work
     contentBase: path.join(__dirname, "build"),
     historyApiFallback: true,
-    port: 5000,
+    port: 5000
   },
+  devtool: process.env.NODE_ENV === "development" ? "inline-source-map" : false,
+  plugins: [
+    new HtmlPlugin({
+      filename: "index.html",
+      template: "./src/index.html",
+      favicon: "./src/images/favicon.ico"
+    }),
+    new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
+    })
+  ]
 };
