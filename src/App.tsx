@@ -12,12 +12,12 @@ import Navbar from "./components/navbar/Navbar";
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <div className="App">
-        <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/sign-in" component={Login} />
-          <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
         </Switch>
       </div>
     </BrowserRouter>
