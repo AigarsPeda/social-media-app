@@ -2,13 +2,23 @@
 @import "./variables.scss";
 @import "./breakpoints.scss";
 
+// pages
+@import "../pages/home/home.scss";
+@import "../pages/login/login.scss";
+
+// components
 @import "../components/navbar/navbar.scss";
+@import "../components/scream/scream.scss";
+@import "../components/spinner/spinner.scss";
 
 body,
 html {
   overscroll-behavior: none;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   color: $text;
+  background-color: $offWhite;
   font-family: "Poppins", sans-serif, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
@@ -17,6 +27,15 @@ html {
 }
 
 .App {
-  max-width: 960px;
+  max-width: 75rem;
   margin: 0 auto;
+
+  a {
+    text-decoration: none;
+  }
+
+  @include media("<desktop") {
+    padding-left: $padding;
+    padding-right: $padding;
+  }
 }
