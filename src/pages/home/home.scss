@@ -1,0 +1,15 @@
+.home {
+  display: grid;
+  grid-gap: 0.5rem;
+
+  // when larger then phone
+  @include media(">=tablet") {
+    grid-template-columns: 65% auto;
+    grid-gap: 2rem;
+  }
+
+  .spinner {
+    text-align: center;
+    padding-top: 1.5rem;
+  }
+}
