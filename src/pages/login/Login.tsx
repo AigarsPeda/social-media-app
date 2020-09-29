@@ -1,13 +1,6 @@
 import React, { useState } from "react";
-import {
-  Link,
-  Redirect,
-  RouteComponentProps,
-  withRouter
-} from "react-router-dom";
 
-// constants
-import { BASE_URL } from "../../constant";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 
 // types
 import { ErrorsType } from "../../types/types";
@@ -17,11 +10,13 @@ import Logo from "../../images/Logo";
 import Spinner from "../../components/spinner/Spinner";
 import Input from "../../components/reusable/Input";
 
+import { BASE_URL } from "../../constant";
+
 interface Props extends RouteComponentProps {}
 
 const Login: React.FC<Props> = (props) => {
   const { history } = props;
-  const [user, setUser] = useState({
+  const [userData, setUserData] = useState({
     email: "",
     password: ""
   });
@@ -30,7 +25,7 @@ const Login: React.FC<Props> = (props) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUser((state) => ({
+    setUserData((state) => ({
       ...state,
       [name]: value
     }));
@@ -45,16 +40,15 @@ const Login: React.FC<Props> = (props) => {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(userData)
     })
       .then((response) => response.json())
       .then((data) => {
         setIsLoading(false);
         // if form DB received token there are user such in DB
         if ("token" in data) {
-          history.push("/");
-          // TODO: token must update state
           localStorage.setItem("FBIdToken", `Bearer ${data.token}`);
+          history.push("/");
         } else {
           setErrors(data);
         }
@@ -62,14 +56,9 @@ const Login: React.FC<Props> = (props) => {
       .catch((err) => console.log(err));
   };
 
-  // if token is already log in
-  const token = localStorage.getItem("FBIdToken");
-  if (token) {
-    return <Redirect to="/" />;
-  }
-
   return (
     <div className="login">
+      {console.log(errors)}
       <div className="logo">
         <Logo />
       </div>
@@ -79,7 +68,7 @@ const Login: React.FC<Props> = (props) => {
           htmlFor="email"
           labelTitle="Email"
           type="email"
-          value={user.email}
+          value={userData.email}
           error={errors.email}
           errorClass="errors"
           name="email"
@@ -91,7 +80,7 @@ const Login: React.FC<Props> = (props) => {
           labelTitle="Password"
           type="password"
           autoComplete="off"
-          value={user.password}
+          value={userData.password}
           error={errors.password}
           errorClass="errors"
           name="password"
@@ -101,7 +90,7 @@ const Login: React.FC<Props> = (props) => {
         {errors.general && <p>{errors.general}</p>}
         <button
           type="submit"
-          disabled={!user.email || !user.password || isLoading}
+          disabled={!userData.email || !userData.password || isLoading}
         >
           {isLoading ? <Spinner /> : "Login"}
         </button>
