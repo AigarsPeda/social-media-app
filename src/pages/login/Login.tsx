@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter
+} from "react-router-dom";
 
 // constants
 import { BASE_URL } from "../../constant";
@@ -48,13 +53,20 @@ const Login: React.FC<Props> = (props) => {
         // if form DB received token there are user such in DB
         if ("token" in data) {
           history.push("/");
-          // console.log(data.token);
+          // TODO: token must update state
+          localStorage.setItem("FBIdToken", `Bearer ${data.token}`);
         } else {
           setErrors(data);
         }
       })
       .catch((err) => console.log(err));
   };
+
+  // if token is already log in
+  const token = localStorage.getItem("FBIdToken");
+  if (token) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="login">
