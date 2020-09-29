@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter
+} from "react-router-dom";
 
 // constants
 import { BASE_URL } from "../../constant";
@@ -49,8 +54,8 @@ const SignUp: React.FC<Props> = (props) => {
         setIsLoading(false);
         // if form DB received token there are user such in DB
         if ("token" in data) {
+          localStorage.setItem("FBIdToken", `Bearer ${data.token}`);
           history.push("/");
-          // console.log(data.token);
         } else {
           setErrors(data);
         }
@@ -61,6 +66,12 @@ const SignUp: React.FC<Props> = (props) => {
   const displayError = (error: string | undefined) => {
     return error && <p>{error}</p>;
   };
+
+  // if token is already log in
+  const token = localStorage.getItem("FBIdToken");
+  if (token) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="signup">
@@ -124,7 +135,7 @@ const SignUp: React.FC<Props> = (props) => {
           {isLoading ? <Spinner /> : "Sign Up"}
         </button>
         <section>
-          <span>Don't have account?</span>
+          <span>Already have an account?</span>
           <Link to="/login">Log In</Link>
         </section>
       </form>
