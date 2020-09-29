@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
 import { ScreamType } from "../../types/types";
 
 interface Props {
@@ -19,16 +22,8 @@ const Scream: React.FC<Props> = (props) => {
   } = scream;
 
   const dateFormatted = (isoDate: string) => {
-    const date = new Date(isoDate);
-    var options = {
-      hour: "numeric",
-      minute: "numeric"
-      // day: "numeric",
-      // month: "numeric",
-      // year: "numeric"
-    };
-
-    return date.toLocaleDateString("en-GB", options);
+    dayjs.extend(relativeTime);
+    return dayjs(isoDate).fromNow();
   };
 
   return (
