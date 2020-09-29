@@ -9,6 +9,9 @@ export type ScreamType = {
 };
 
 export type ErrorsType = {
-  general?: null;
-  error?: null;
+  general?: string;
+  password?: string;
+  email?: string;
+  handel?: string;
+  confirmPassword?: string;
 };
