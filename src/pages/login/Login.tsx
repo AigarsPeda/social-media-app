@@ -47,6 +47,7 @@ const Login: React.FC<Props> = (props) => {
         setIsLoading(false);
         // if form DB received token there are user such in DB
         if ("token" in data) {
+          console.log(data.token);
           localStorage.setItem("FBIdToken", `Bearer ${data.token}`);
           history.push("/");
         } else {
