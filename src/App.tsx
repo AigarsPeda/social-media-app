@@ -9,6 +9,10 @@ import { TokenType } from "./types/types";
 // utils
 import AuthRoute from "./utils/authRoute/AuthRoute";
 
+// redux
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 // components
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -33,19 +37,21 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <Navbar />
-      <div className="App">
-        <Switch>
-          <AuthRoute
-            exact
-            path="/"
-            component={Home}
-            isAuthenticated={isAuthenticated}
-          />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
-        </Switch>
-      </div>
+      <Provider store={store}>
+        <Navbar />
+        <div className="App">
+          <Switch>
+            <AuthRoute
+              exact
+              path="/"
+              component={Home}
+              isAuthenticated={isAuthenticated}
+            />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
+          </Switch>
+        </div>
+      </Provider>
     </BrowserRouter>
   );
 };
