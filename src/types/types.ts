@@ -38,3 +38,10 @@ export type LoginUserType = {
   email: string;
   password: string;
 };
+
+export type SignUserType = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  handle: string;
+};

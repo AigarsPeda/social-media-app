@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 
 // types
-import { ErrorsType } from "../../types/types";
+import { ErrorsType, LoginUserType } from "../../types/types";
 
 // components
 import Logo from "../../images/Logo";
@@ -31,35 +31,34 @@ const Login: React.FC<Props> = (props) => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsLoading(true);
-    fetch(BASE_URL + "/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userData)
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setIsLoading(false);
-        // if form DB received token there are user such in DB
-        if ("token" in data) {
-          console.log(data.token);
-          localStorage.setItem("FBIdToken", `Bearer ${data.token}`);
-          history.push("/");
-        } else {
-          setErrors(data);
-        }
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  const logInUser = (user: LoginUserType) => {
+    const response = axios
+      .post(`${BASE_URL}/login`, user, config)
+      .then((res) => {
+        return res.data;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        return err.response.data;
+      });
+    return response;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // something.token or something.password or something.general
+    const something = await logInUser(userData);
+    console.log("something: ", something);
   };
 
   return (
     <div className="login">
-      {console.log(errors)}
       <div className="logo">
         <Logo />
       </div>
