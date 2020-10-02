@@ -45,3 +45,18 @@ export type SignUserType = {
   confirmPassword: string;
   handle: string;
 };
+
+export type UserDataType = {
+  credentials: {
+    bio: string;
+    createdAt: string;
+    email: string;
+    handle: string;
+    imageUrl: string;
+    location: string;
+    userId: string;
+    website: string;
+  };
+  likes: [];
+  notifications: [];
+};
