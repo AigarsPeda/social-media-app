@@ -20,20 +20,20 @@ import SignUp from "./pages/signup/SignUp";
 import Navbar from "./components/navbar/Navbar";
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("FBIdToken");
-    if (token) {
-      const decodedToken: TokenType = jwtDecode(token);
-      if (decodedToken.exp * 1000 < Date.now()) {
-        window.location.href = "/login";
-        setIsAuthenticated(false);
-      } else {
-        setIsAuthenticated(true);
-      }
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("FBIdToken");
+  //   if (token) {
+  //     const decodedToken: TokenType = jwtDecode(token);
+  //     if (decodedToken.exp * 1000 < Date.now()) {
+  //       window.location.href = "/login";
+  //       setIsAuthenticated(false);
+  //     } else {
+  //       setIsAuthenticated(true);
+  //     }
+  //   }
+  // }, [isAuthenticated]);
 
   return (
     <BrowserRouter>
@@ -41,11 +41,11 @@ const App: React.FC = () => {
         <Navbar />
         <div className="App">
           <Switch>
-            <AuthRoute
+            <Route
               exact
               path="/"
               component={Home}
-              isAuthenticated={isAuthenticated}
+              // isAuthenticated={isAuthenticated}
             />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
