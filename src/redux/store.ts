@@ -2,13 +2,15 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
-import authReducer from "./reducers/authReducer";
+import userReducer from "./reducers/userReducer";
+import errorReducer from "./reducers/errorReducer";
 
 const initialState = {};
 const middleware = [thunk];
 
 const rootReducers = combineReducers({
-  auth: authReducer
+  user: userReducer,
+  errors: errorReducer
 });
 
 const store = createStore(
@@ -18,3 +20,4 @@ const store = createStore(
 );
 
 export default store;
+export type RootStateType = ReturnType<typeof rootReducers>;
