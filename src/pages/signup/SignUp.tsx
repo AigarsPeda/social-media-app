@@ -1,22 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
-import {
-  Link,
-  Redirect,
-  RouteComponentProps,
-  withRouter
-} from "react-router-dom";
 
-// constants
-import { BASE_URL } from "../../constant";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 
 // types
-import { ErrorsType, SignUserType } from "../../types/types";
+import { ErrorsType } from "../../types/types";
 
 // components
 import Logo from "../../images/Logo";
 import Spinner from "../../components/spinner/Spinner";
 import Input from "../../components/reusable/Input";
+import { signUser } from "../../services/auth.services";
 
 interface Props extends RouteComponentProps {}
 
@@ -39,40 +32,16 @@ const SignUp: React.FC<Props> = (props) => {
     }));
   };
 
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  const signInUser = (user: SignUserType) => {
-    const response = axios
-      .post(`${BASE_URL}/signup`, user, config)
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        return err.response.data;
-      });
-    return response;
-  };
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // localStorage.setItem("FBIdToken", `Bearer ${data.token}`);
-    const something = await signInUser(userData);
+    const something = await signUser(userData);
     console.log(something);
   };
 
   const displayError = (error: string | undefined) => {
     return error && <p>{error}</p>;
   };
-
-  // if token is already log in
-  const token = localStorage.getItem("FBIdToken");
-  if (token) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <div className="signup">
