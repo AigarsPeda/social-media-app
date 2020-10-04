@@ -4,13 +4,18 @@ import thunk from "redux-thunk";
 
 import userReducer from "./reducers/userReducer";
 import errorReducer from "./reducers/errorReducer";
+import uiReducer from "./reducers/uiReducer";
 
-const initialState = {};
+const initialState = localStorage.getItem("reduxState")
+  ? JSON.parse(localStorage.getItem("reduxState")!)
+  : {};
+
 const middleware = [thunk];
 
 const rootReducers = combineReducers({
   user: userReducer,
-  errors: errorReducer
+  errors: errorReducer,
+  ui: uiReducer
 });
 
 const store = createStore(
@@ -18,6 +23,10 @@ const store = createStore(
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
+
+store.subscribe(() => {
+  localStorage.setItem("reduxState", JSON.stringify(store.getState()));
+});
 
 export default store;
 export type RootStateType = ReturnType<typeof rootReducers>;
