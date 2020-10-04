@@ -18,6 +18,14 @@
       padding-right: $padding;
     }
 
+    button {
+      border: none;
+      background-color: $secondary;
+      color: $white;
+      width: 120px;
+      height: 30px;
+    }
+
     a {
       text-decoration: none;
       color: $white;
