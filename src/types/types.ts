@@ -57,6 +57,12 @@ export type UserDataType = {
     userId: string;
     website: string;
   };
-  likes: [];
-  notifications: [];
+  likes: {
+    userHandle: string;
+    screamId: string;
+  }[];
+  notifications: {
+    userHandle: string;
+    screamId: string;
+  }[];
 };
