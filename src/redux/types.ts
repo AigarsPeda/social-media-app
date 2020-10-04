@@ -7,13 +7,22 @@ interface IAuthenticateUserAction {
   payload: string;
 }
 
+export const UNAUTHENTICATED_USER = "UNAUTHENTICATED_USER";
+interface IUnauthenticatedUserAction {
+  type: typeof UNAUTHENTICATED_USER;
+  // payload: string;
+}
+
 export const SET_USER = "SET_USER";
 interface ISetUserAction {
   type: typeof SET_USER;
   payload: UserDataType;
 }
 
-export type AuthenticateActionTypes = IAuthenticateUserAction | ISetUserAction;
+export type AuthenticateActionTypes =
+  | IAuthenticateUserAction
+  | ISetUserAction
+  | IUnauthenticatedUserAction;
 
 // ERROR
 export const SET_ERROR = "SET_ERROR";
@@ -21,4 +30,24 @@ interface ISetErrorAction {
   type: typeof SET_ERROR;
   payload: ErrorsType;
 }
-export type SetErrorActionTypes = ISetErrorAction;
+
+export const CLEAR_ERROR = "CLEAR_ERROR";
+interface IClearErrorAction {
+  type: typeof CLEAR_ERROR;
+  // payload: ErrorsType;
+}
+export type SetErrorActionTypes = ISetErrorAction | IClearErrorAction;
+
+// UI
+export const IS_LOADING_UI = "IS_LOADING_UI";
+interface IisLoadingUIAction {
+  type: typeof IS_LOADING_UI;
+  // payload: ErrorsType;
+}
+
+export const IS_LOADED_UI = "IS_LOADED_UI";
+interface ILoadedUIAction {
+  type: typeof IS_LOADED_UI;
+  // payload: ErrorsType;
+}
+export type SetLoadingUITypes = IisLoadingUIAction | ILoadedUIAction;
