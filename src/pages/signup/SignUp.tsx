@@ -1,32 +1,32 @@
 import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+// redux
+import { connect } from "react-redux";
+import { createUser } from "../../redux/actions/userAction";
 
 // types
-import { ErrorsType } from "../../types/types";
+import { RootStateType } from "../../redux/store";
 
 // components
 import Logo from "../../images/Logo";
 import Spinner from "../../components/spinner/Spinner";
 import Input from "../../components/reusable/Input";
-import { signUser } from "../../services/auth.services";
 
-interface Props extends RouteComponentProps {}
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 const SignUp: React.FC<Props> = (props) => {
-  const { history } = props;
-  const [userData, setUserData] = useState({
+  const { createUser, isAuthenticated, isLoading, errors } = props;
+  const [newUserData, setNewUserData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     handle: ""
   });
-  const [errors, setErrors] = useState<ErrorsType>({});
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserData((state) => ({
+    setNewUserData((state) => ({
       ...state,
       [name]: value
     }));
@@ -34,14 +34,17 @@ const SignUp: React.FC<Props> = (props) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // localStorage.setItem("FBIdToken", `Bearer ${data.token}`);
-    const something = await signUser(userData);
-    console.log(something);
+    // User action
+    createUser(newUserData);
   };
 
   const displayError = (error: string | undefined) => {
     return error && <p>{error}</p>;
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="signup">
@@ -54,7 +57,7 @@ const SignUp: React.FC<Props> = (props) => {
           htmlFor="email"
           labelTitle="Email"
           type="email"
-          value={userData.email}
+          value={newUserData.email}
           error={errors.email}
           errorClass="errors"
           name="email"
@@ -66,7 +69,7 @@ const SignUp: React.FC<Props> = (props) => {
           labelTitle="Password"
           type="password"
           autoComplete="off"
-          value={userData.password}
+          value={newUserData.password}
           error={errors.password}
           errorClass="errors"
           name="password"
@@ -78,7 +81,7 @@ const SignUp: React.FC<Props> = (props) => {
           labelTitle="Confirm Password"
           type="password"
           autoComplete="off"
-          value={userData.confirmPassword}
+          value={newUserData.confirmPassword}
           error={errors.confirmPassword}
           errorClass="errors"
           name="confirmPassword"
@@ -90,7 +93,7 @@ const SignUp: React.FC<Props> = (props) => {
           labelTitle="Handle"
           type="text"
           autoComplete="on"
-          value={userData.handle}
+          value={newUserData.handle}
           error={errors.handel}
           errorClass="errors"
           name="handle"
@@ -100,7 +103,7 @@ const SignUp: React.FC<Props> = (props) => {
         {displayError(errors.general)}
         <button
           type="submit"
-          disabled={!userData.email || !userData.password || isLoading}
+          disabled={!newUserData.email || !newUserData.password || isLoading}
         >
           {isLoading ? <Spinner /> : "Sign Up"}
         </button>
@@ -113,4 +116,12 @@ const SignUp: React.FC<Props> = (props) => {
   );
 };
 
-export default withRouter(SignUp);
+const mapStateToProps = (state: RootStateType) => ({
+  isAuthenticated: state.user.isAuthenticated,
+  errors: state.errors.error,
+  isLoading: state.ui.isLoading
+});
+
+const mapDispatchToProps = { createUser };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
