@@ -20,10 +20,13 @@
 
     button {
       border: none;
-      background-color: $secondary;
+      background-color: transparent;
       color: $white;
-      width: 120px;
-      height: 30px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.03rem;
+      // width: 120px;
+      // height: 30px;
     }
 
     a {
@@ -33,7 +36,7 @@
 
     .logo {
       width: 40px;
-
+      padding-top: 5px;
       #logo {
         fill: #007d99;
       }
@@ -44,7 +47,7 @@
       list-style: none;
 
       a {
-        margin-left: 24px;
+        margin-left: 1.5rem;
       }
     }
   }
