@@ -14,13 +14,13 @@ import Input from "../../components/reusable/Input";
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 const Login: React.FC<Props> = (props) => {
-  const { logInUser, isAuthenticated, errors } = props;
+  const { logInUser, isAuthenticated, errors, isLoading } = props;
   const [userData, setUserData] = useState({
     email: "",
     password: ""
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -42,7 +42,6 @@ const Login: React.FC<Props> = (props) => {
 
   return (
     <div className="login">
-      {console.log("LOGIN COMPONENT: ", isAuthenticated)}
       <div className="logo">
         <Logo />
       </div>
@@ -89,7 +88,8 @@ const Login: React.FC<Props> = (props) => {
 
 const mapStateToProps = (state: RootStateType) => ({
   isAuthenticated: state.user.isAuthenticated,
-  errors: state.errors.error
+  errors: state.errors.error,
+  isLoading: state.ui.isLoading
 });
 
 const mapDispatchToProps = { logInUser };
