@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 
+// types
 import { ScreamType } from "../../types/types";
+
+// helper functions
+import { dateFormatted } from "../../helpers/dateFormatted";
 
 interface Props {
   scream: ScreamType;
@@ -21,10 +23,10 @@ const Scream: React.FC<Props> = (props) => {
     commentCount
   } = scream;
 
-  const dateFormatted = (isoDate: string) => {
-    dayjs.extend(relativeTime);
-    return dayjs(isoDate).fromNow();
-  };
+  // const dateFormatted = (isoDate: string) => {
+  //   dayjs.extend(relativeTime);
+  //   return dayjs(isoDate).fromNow();
+  // };
 
   return (
     <div className="scream">
