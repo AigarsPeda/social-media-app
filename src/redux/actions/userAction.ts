@@ -22,7 +22,9 @@ import {
   SET_USER,
   AuthenticateActionTypes,
   SetErrorActionTypes,
-  SetLoadingUITypes
+  SetLoadingUITypes,
+  LOADING_USER,
+  LOADED_USER
 } from "../types";
 
 type AppThunk<ReturnType = any> = ThunkAction<
@@ -99,6 +101,10 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
 };
 
 export const getUserData = (): AppThunk => (dispatch) => {
+  // setting user to loading
+  dispatch({
+    type: LOADING_USER
+  });
   axios
     // get works because axis header has token from signInUser or createUser action
     .get(`${BASE_URL}/user`)
@@ -108,9 +114,17 @@ export const getUserData = (): AppThunk => (dispatch) => {
         type: SET_USER,
         payload: res.data
       });
+      // setting user to loaded
+      dispatch({
+        type: LOADED_USER
+      });
     })
     .catch((err) => {
       console.log("SET_USER ACTION ERROR: ", console.error(err));
+      // setting user to loaded
+      dispatch({
+        type: LOADED_USER
+      });
     });
 };
 
