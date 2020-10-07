@@ -1,0 +1,77 @@
+.profile {
+  .spinner {
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.625rem;
+    padding: 1.6rem;
+    background-color: $white;
+
+    @include media("<tablet") {
+      padding: 0.2rem;
+      // padding-right: $padding;
+    }
+    // text-align: center;
+
+    -webkit-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
+
+    h1 {
+      color: $text;
+      letter-spacing: 0.09375rem;
+      svg {
+        // vertical-align: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: 0.7rem;
+        margin-right: 0.7rem;
+      }
+    }
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-left: 0.7rem;
+
+      margin: 10px;
+
+      @include media("<desktop") {
+        margin: 7px;
+        // padding-right: $padding;
+      }
+    }
+
+    a {
+      p {
+        color: $secondary;
+      }
+    }
+
+    .img-container {
+      @include media("<tablet") {
+        padding-top: 0.625rem;
+      }
+
+      img {
+        border-radius: 50%;
+        width: 10rem;
+        height: 10rem;
+        display: block;
+        object-fit: cover;
+        margin: auto;
+      }
+    }
+
+    .icon {
+      width: 1.375rem;
+      height: 1.375rem;
+      margin-right: 7px;
+
+      vertical-align: sub;
+    }
+  }
+}
