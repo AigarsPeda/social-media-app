@@ -3,18 +3,22 @@ import {
   AUTHENTICATE_USER,
   SET_USER,
   UNAUTHENTICATED_USER,
-  AuthenticateActionTypes
+  AuthenticateActionTypes,
+  LOADING_USER,
+  LOADED_USER
 } from "../types";
 import { UserDataType } from "../../types/types";
 
 export interface IUserInitialState {
   isAuthenticated: boolean;
+  isLoadingUser: boolean;
   token: string;
   userData: UserDataType;
 }
 
 const initialState: IUserInitialState = {
   isAuthenticated: false,
+  isLoadingUser: false,
   token: "",
   userData: {
     credentials: {
@@ -54,6 +58,16 @@ export default (state = initialState, action: AuthenticateActionTypes) => {
       return {
         ...state,
         userData: action.payload
+      };
+    case LOADING_USER:
+      return {
+        ...state,
+        isLoadingUser: true
+      };
+    case LOADED_USER:
+      return {
+        ...state,
+        isLoadingUser: false
       };
     case UNAUTHENTICATED_USER:
       return initialState;
