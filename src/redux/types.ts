@@ -19,10 +19,24 @@ interface ISetUserAction {
   payload: UserDataType;
 }
 
+export const LOADING_USER = "LOADING_USER";
+interface ILoadingUserAction {
+  type: typeof LOADING_USER;
+  // payload: UserDataType;
+}
+
+export const LOADED_USER = "LOADED_USER";
+interface ILoadedUserAction {
+  type: typeof LOADED_USER;
+  // payload: UserDataType;
+}
+
 export type AuthenticateActionTypes =
   | IAuthenticateUserAction
   | ISetUserAction
-  | IUnauthenticatedUserAction;
+  | IUnauthenticatedUserAction
+  | ILoadingUserAction
+  | ILoadedUserAction;
 
 // ERROR
 export const SET_ERROR = "SET_ERROR";
