@@ -9,6 +9,7 @@ import { ScreamType } from "../../types/types";
 // components
 import Scream from "../../components/scream/Scream";
 import Spinner from "../../components/spinner/Spinner";
+import Profile from "../../components/profile/Profile";
 
 const Home: React.FC = () => {
   const [screams, setScreams] = useState<ScreamType[]>([]);
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       <div>{recentScreamMarkup}</div>
-      <div>Profile</div>
+      <Profile />
     </div>
   );
 };
