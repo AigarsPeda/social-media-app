@@ -26,7 +26,7 @@ const AppRoutes: React.FC<Props> = (props) => {
 
   // TODO: i should check if token has not been ended
   useEffect(() => {
-    // checking if token is valid and if it is setting in to axis header
+    // checking if token is valid and if it is setting in to axios header
     if (token) {
       console.log("ES TE");
       const decodedToken: TokenType = jwtDecode(token);
