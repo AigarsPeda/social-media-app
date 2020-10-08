@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 // constants
 import { BASE_URL } from "../../constant";
@@ -15,10 +16,26 @@ const Home: React.FC = () => {
   const [screams, setScreams] = useState<ScreamType[]>([]);
 
   useEffect(() => {
-    fetch(BASE_URL + "/screams")
-      .then((response) => response.json())
-      .then((data) => setScreams(data))
-      .catch((err) => console.log("Error fetching screams: ", err));
+    let mounted = true;
+
+    const loadData = async () => {
+      const response = await axios
+        .get(`${BASE_URL}/screams`)
+        // destruction data property from res
+        .then((res) => res.data)
+        .catch((err) => console.error(err));
+
+      // check if components is still mounted
+      if (mounted) {
+        setScreams(response);
+      }
+    };
+
+    loadData();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const recentScreamMarkup = screams.length ? (
