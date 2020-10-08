@@ -47,16 +47,7 @@ export type SignUserType = {
 };
 
 export type UserDataType = {
-  credentials: {
-    bio: string;
-    createdAt: string;
-    email: string;
-    handle: string;
-    imageUrl: string;
-    location: string;
-    userId: string;
-    website: string;
-  };
+  credentials: UserCredentialsType;
   likes: {
     userHandle: string;
     screamId: string;
@@ -65,4 +56,21 @@ export type UserDataType = {
     userHandle: string;
     screamId: string;
   }[];
+};
+
+export type UserCredentialsType = {
+  bio: string;
+  createdAt: string;
+  email: string;
+  handle: string;
+  imageUrl: string;
+  location: string;
+  userId: string;
+  website: string;
+};
+
+export type UserDetailsType = {
+  bio: string;
+  website: string;
+  location: string;
 };
