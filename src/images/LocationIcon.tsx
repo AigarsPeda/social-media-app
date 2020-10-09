@@ -1,6 +1,6 @@
 import React from "react";
 
-const Location = (props: React.SVGProps<SVGSVGElement>) => {
+const LocationIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 342 512"
@@ -15,4 +15,4 @@ const Location = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default Location;
+export default LocationIcon;

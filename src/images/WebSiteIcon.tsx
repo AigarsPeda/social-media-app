@@ -1,6 +1,6 @@
 import React from "react";
 
-const WebSite = (props: React.SVGProps<SVGSVGElement>) => {
+const WebSiteIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 414 366"
@@ -18,4 +18,4 @@ const WebSite = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default WebSite;
+export default WebSiteIcon;

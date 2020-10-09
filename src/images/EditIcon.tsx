@@ -1,6 +1,6 @@
 import React from "react";
 
-const Edit = (props: React.SVGProps<SVGSVGElement>) => {
+const EditIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 402 399"
@@ -18,4 +18,4 @@ const Edit = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default Edit;
+export default EditIcon;

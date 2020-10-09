@@ -1,6 +1,6 @@
 import React from "react";
 
-const Calendar = (props: React.SVGProps<SVGSVGElement>) => {
+const CalendarIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 32 34"
@@ -18,4 +18,4 @@ const Calendar = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default Calendar;
+export default CalendarIcon;

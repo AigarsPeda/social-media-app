@@ -1,6 +1,6 @@
 import React from "react";
 
-const Logout = (props: React.SVGProps<SVGSVGElement>) => {
+const LogoutIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 512 511"
@@ -22,4 +22,4 @@ const Logout = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default Logout;
+export default LogoutIcon;

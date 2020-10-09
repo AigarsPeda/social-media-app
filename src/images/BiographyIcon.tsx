@@ -1,6 +1,6 @@
 import React from "react";
 
-const Biography = (props: React.SVGProps<SVGSVGElement>) => {
+const BiographyIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 480 480"
@@ -23,4 +23,4 @@ const Biography = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default Biography;
+export default BiographyIcon;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Pencil = (props: React.SVGProps<SVGSVGElement>) => {
+const PencilIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 512 512"
@@ -17,4 +17,4 @@ const Pencil = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default Pencil;
+export default PencilIcon;
