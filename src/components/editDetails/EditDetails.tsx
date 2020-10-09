@@ -33,7 +33,9 @@ const EditDetails: React.FC<Props> = (props) => {
     });
   }, [user]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setUserDetails((state) => ({
       ...state,
@@ -51,7 +53,12 @@ const EditDetails: React.FC<Props> = (props) => {
     <div className="edit-details">
       <form onSubmit={handleSubmit}>
         <label>Bio</label>
-        <input value={userDetails.bio} name="bio" onChange={handleChange} />
+        <textarea
+          rows={3}
+          value={userDetails.bio}
+          name="bio"
+          onChange={handleChange}
+        />
         <label>Website</label>
         <input
           value={userDetails.website}
