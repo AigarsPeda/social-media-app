@@ -11,7 +11,11 @@ import { authToken } from "../../helpers/authToken";
 import { signUpUser, singInUser } from "../../services/auth.services";
 
 // types
-import { LoginUserType, SignUserType } from "../../types/types";
+import {
+  LoginUserType,
+  SignUserType,
+  UserDetailsType
+} from "../../types/types";
 import {
   UNAUTHENTICATED_USER,
   AUTHENTICATE_USER,
@@ -34,6 +38,7 @@ type AppThunk<ReturnType = any> = ThunkAction<
   Action<string>
 >;
 
+// log in existing user
 export const logInUser = (userData: LoginUserType): AppThunk => async (
   dispatch
 ) => {
@@ -67,6 +72,7 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
   }
 };
 
+// cerate new user
 export const createUser = (newUserData: SignUserType): AppThunk => async (
   dispatch
 ) => {
@@ -100,6 +106,7 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
   }
 };
 
+// get user data from db
 export const getUserData = (): AppThunk => (dispatch) => {
   // setting user to loading
   dispatch({
@@ -109,7 +116,6 @@ export const getUserData = (): AppThunk => (dispatch) => {
     // get works because axis header has token from signInUser or createUser action
     .get(`${BASE_URL}/user`)
     .then((res) => {
-      console.log("SET_USER ACTION: ", res.data);
       dispatch({
         type: SET_USER,
         payload: res.data
@@ -128,6 +134,47 @@ export const getUserData = (): AppThunk => (dispatch) => {
     });
 };
 
+// up load image to db and update logged in user
+export const uploadImage = (formData: FormData): AppThunk => (dispatch) => {
+  dispatch({
+    type: LOADING_USER
+  });
+  axios
+    .post(`${BASE_URL}/user/image`, formData)
+    .then(() => {
+      // calling getUserData to fetch new image and set new user data
+      dispatch(getUserData());
+    })
+    .catch((err) => {
+      console.error(err);
+      dispatch({
+        type: LOADED_USER
+      });
+    });
+};
+
+// update logged in user data
+export const editUserDetails = (userDetails: UserDetailsType): AppThunk => (
+  dispatch
+) => {
+  dispatch({
+    type: LOADING_USER
+  });
+  axios
+    .post(`${BASE_URL}/user`, userDetails)
+    .then(() => {
+      // calling getUserData to fetch new image and set new user data
+      dispatch(getUserData());
+    })
+    .catch((err) => {
+      console.error(err);
+      dispatch({
+        type: LOADED_USER
+      });
+    });
+};
+
+// log out user
 export const logOutUser = (): AppThunk => (dispatch) => {
   dispatch({
     type: UNAUTHENTICATED_USER
