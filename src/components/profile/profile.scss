@@ -9,39 +9,54 @@
     margin-top: 0.625rem;
     padding: 1.6rem;
     background-color: $white;
-
-    @include media("<tablet") {
-      padding: 0.2rem;
-      // padding-right: $padding;
-    }
-    // text-align: center;
-
     -webkit-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
     box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
 
+    @include media("<tablet") {
+      padding: 0.2rem;
+    }
+
+    .container-btn {
+      text-align: right;
+
+      button {
+        border: none;
+        background: none;
+
+        .icon {
+          fill: $secondary;
+        }
+      }
+    }
+
     h1 {
       color: $text;
       letter-spacing: 0.09375rem;
+      margin-bottom: 0;
       svg {
-        // vertical-align: none;
         width: 1.5rem;
         height: 1.5rem;
-        margin-left: 0.7rem;
-        margin-right: 0.7rem;
+        margin-left: 0.4375rem;
+        margin-right: 0.4375rem;
       }
+    }
+
+    hr {
+      margin: auto;
+      margin-top: 0;
+      width: 100%;
+      border: 1px solid $secondary;
     }
 
     p {
       font-size: 1.2rem;
       font-weight: 500;
       margin-left: 0.7rem;
-
       margin: 10px;
 
       @include media("<desktop") {
-        margin: 7px;
-        // padding-right: $padding;
+        margin: 0.4375rem;
       }
     }
 
@@ -70,7 +85,6 @@
       width: 1.375rem;
       height: 1.375rem;
       margin-right: 7px;
-
       vertical-align: sub;
     }
   }
