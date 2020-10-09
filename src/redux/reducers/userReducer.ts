@@ -1,4 +1,4 @@
-import { isTokenValid } from "../../helpers/isTokenValid";
+import { isToken } from "../../helpers/isToken";
 import {
   AUTHENTICATE_USER,
   SET_USER,
@@ -51,7 +51,7 @@ export default (state = initialState, action: AuthenticateActionTypes) => {
     case AUTHENTICATE_USER:
       return {
         ...state,
-        isAuthenticated: isTokenValid(action.payload),
+        isAuthenticated: isToken(action.payload),
         token: action.payload
       };
     case SET_USER:
