@@ -1,4 +1,4 @@
-import { ErrorsType, UserDataType } from "../types/types";
+import { ErrorsType, ScreamType, UserDataType } from "../types/types";
 
 // USER
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
@@ -65,3 +65,48 @@ interface ILoadedUIAction {
   // payload: ErrorsType;
 }
 export type SetLoadingUITypes = IisLoadingUIAction | ILoadedUIAction;
+
+// DATA
+export const SET_SCREAMS = "SET_SCREAMS";
+interface ISetScreamsAction {
+  type: typeof SET_SCREAMS;
+  payload: ScreamType[];
+}
+
+export const SET_SCREAM = "SET_SCREAM";
+interface ISetScreamAction {
+  type: typeof SET_SCREAM;
+  payload: ScreamType;
+}
+
+export const IS_LOADING_DATA = "IS_LOADING_DATA";
+interface IIsLoadingDataAction {
+  type: typeof IS_LOADING_DATA;
+  // payload: ScreamType[];
+}
+
+export const LIKE_SCREAM = "LIKE_SCREAM";
+interface ILikeScreamAction {
+  type: typeof LIKE_SCREAM;
+  payload: ScreamType;
+}
+
+export const UNLIKE_LIKE_SCREAM = "UNLIKE_LIKE_SCREAM";
+interface IUnLikeScreamAction {
+  type: typeof UNLIKE_LIKE_SCREAM;
+  payload: ScreamType;
+}
+
+export const CLEAR_DATA = "CLEAR_DATA";
+interface IClearDataAction {
+  type: typeof CLEAR_DATA;
+  // payload: ScreamType[];
+}
+
+export type SetDataTypes =
+  | ISetScreamsAction
+  | ISetScreamAction
+  | IIsLoadingDataAction
+  | ILikeScreamAction
+  | IUnLikeScreamAction
+  | IClearDataAction;

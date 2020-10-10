@@ -28,13 +28,18 @@ import {
   SetErrorActionTypes,
   SetLoadingUITypes,
   LOADING_USER,
-  LOADED_USER
+  LOADED_USER,
+  SetDataTypes,
+  CLEAR_DATA
 } from "../types";
 
 type AppThunk<ReturnType = any> = ThunkAction<
   ReturnType,
   RootStateType,
-  AuthenticateActionTypes | SetErrorActionTypes | SetLoadingUITypes,
+  | AuthenticateActionTypes
+  | SetErrorActionTypes
+  | SetLoadingUITypes
+  | SetDataTypes,
   Action<string>
 >;
 
@@ -176,6 +181,9 @@ export const editUserDetails = (userDetails: UserDetailsType): AppThunk => (
 
 // log out user
 export const logOutUser = (): AppThunk => (dispatch) => {
+  dispatch({
+    type: CLEAR_DATA
+  });
   dispatch({
     type: UNAUTHENTICATED_USER
   });

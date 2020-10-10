@@ -4,8 +4,11 @@ import {
   SET_USER,
   UNAUTHENTICATED_USER,
   AuthenticateActionTypes,
+  SetDataTypes,
   LOADING_USER,
-  LOADED_USER
+  LOADED_USER,
+  LIKE_SCREAM,
+  UNLIKE_LIKE_SCREAM
 } from "../types";
 import { UserDataType } from "../../types/types";
 
@@ -46,7 +49,10 @@ const initialState: IUserInitialState = {
   }
 };
 
-export default (state = initialState, action: AuthenticateActionTypes) => {
+export default (
+  state = initialState,
+  action: AuthenticateActionTypes | SetDataTypes
+) => {
   switch (action.type) {
     case AUTHENTICATE_USER:
       return {
@@ -68,6 +74,24 @@ export default (state = initialState, action: AuthenticateActionTypes) => {
       return {
         ...state,
         isLoadingUser: false
+      };
+    case LIKE_SCREAM:
+      return {
+        ...state,
+        likes: [
+          ...state.userData.likes,
+          {
+            userHandle: state.userData.credentials.handle,
+            screamId: action.payload.screamId
+          }
+        ]
+      };
+    case UNLIKE_LIKE_SCREAM:
+      return {
+        ...state,
+        likes: state.userData.likes.filter(
+          (like) => like.screamId !== action.payload.screamId
+        )
       };
     case UNAUTHENTICATED_USER:
       return initialState;
