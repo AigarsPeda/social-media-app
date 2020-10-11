@@ -25,7 +25,7 @@ export const signUpUser = (user: SignUserType) => {
       return res.data;
     });
   // catch is in action and calls different dispatch
-  // TODO: this should be moved to action
+
   // .catch((err) => {
   //   return err.response.data;
   // });
