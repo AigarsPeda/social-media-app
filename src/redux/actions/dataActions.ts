@@ -13,6 +13,7 @@ import {
   IS_LOADING_DATA,
   SetDataTypes
 } from "./../types";
+import { getUserData } from "./userAction";
 
 type AppThunk<ReturnType = any> = ThunkAction<
   ReturnType,
@@ -47,6 +48,8 @@ export const likeScream = (screamId: string): AppThunk => (dispatch) => {
         type: LIKE_SCREAM,
         payload: res.data
       });
+
+      dispatch(getUserData());
     })
     .catch((err) => {
       console.error(err);
@@ -62,6 +65,8 @@ export const unLikeScream = (screamId: string): AppThunk => (dispatch) => {
         type: UNLIKE_LIKE_SCREAM,
         payload: res.data
       });
+
+      dispatch(getUserData());
     })
     .catch((err) => {
       console.error(err);

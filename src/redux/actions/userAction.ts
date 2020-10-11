@@ -19,8 +19,8 @@ import {
 import {
   UNAUTHENTICATED_USER,
   AUTHENTICATE_USER,
-  IS_LOADING_UI,
-  IS_LOADED_UI,
+  // IS_LOADING_UI,
+  // IS_LOADED_UI,
   CLEAR_ERROR,
   SET_ERROR,
   SET_USER,
@@ -49,7 +49,9 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
 ) => {
   try {
     // setting UI to loading
-    dispatch({ type: IS_LOADING_UI });
+    dispatch({
+      type: LOADING_USER
+    });
     const user = await singInUser(userData);
     const { token } = user;
     // adding axios default header if token to use it other axis calls
@@ -64,7 +66,6 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
     // if there is any error in state clear it
     dispatch({ type: CLEAR_ERROR });
     // setting UI to loaded
-    dispatch({ type: IS_LOADED_UI });
   } catch (error) {
     if (error.response) {
       dispatch({
@@ -72,7 +73,9 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
         payload: error.response.data
       });
       // setting UI to loaded
-      dispatch({ type: IS_LOADED_UI });
+      dispatch({
+        type: LOADED_USER
+      });
     }
   }
 };
@@ -83,7 +86,9 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
 ) => {
   try {
     // setting UI to loading
-    dispatch({ type: IS_LOADING_UI });
+    dispatch({
+      type: LOADING_USER
+    });
     const user = await signUpUser(newUserData);
     const { token } = user;
     // adding axios default header if token to use it other axis calls
@@ -97,8 +102,6 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
     dispatch(getUserData());
     // if there is any error in state clear it
     dispatch({ type: CLEAR_ERROR });
-    // setting UI to loaded
-    dispatch({ type: IS_LOADED_UI });
   } catch (error) {
     if (error.response) {
       dispatch({
@@ -106,17 +109,15 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
         payload: error.response.data
       });
       // setting UI to loaded
-      dispatch({ type: IS_LOADED_UI });
+      dispatch({
+        type: LOADED_USER
+      });
     }
   }
 };
 
 // get user data from db
 export const getUserData = (): AppThunk => (dispatch) => {
-  // setting user to loading
-  dispatch({
-    type: LOADING_USER
-  });
   axios
     // get works because axis header has token from signInUser or createUser action
     .get(`${BASE_URL}/user`)
@@ -125,7 +126,6 @@ export const getUserData = (): AppThunk => (dispatch) => {
         type: SET_USER,
         payload: res.data
       });
-      // setting user to loaded
       dispatch({
         type: LOADED_USER
       });
@@ -141,9 +141,6 @@ export const getUserData = (): AppThunk => (dispatch) => {
 
 // up load image to db and update logged in user
 export const uploadImage = (formData: FormData): AppThunk => (dispatch) => {
-  dispatch({
-    type: LOADING_USER
-  });
   axios
     .post(`${BASE_URL}/user/image`, formData)
     .then(() => {

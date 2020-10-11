@@ -63,7 +63,8 @@ export default (
     case SET_USER:
       return {
         ...state,
-        userData: action.payload
+        userData: action.payload,
+        isLoadingUser: false
       };
     case LOADING_USER:
       return {
@@ -78,6 +79,7 @@ export default (
     case LIKE_SCREAM:
       return {
         ...state,
+        ...state.userData,
         likes: [
           ...state.userData.likes,
           {
@@ -89,6 +91,7 @@ export default (
     case UNLIKE_LIKE_SCREAM:
       return {
         ...state,
+        ...state.userData,
         likes: state.userData.likes.filter(
           (like) => like.screamId !== action.payload.screamId
         )
