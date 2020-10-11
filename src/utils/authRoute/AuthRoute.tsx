@@ -1,17 +1,21 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
+import { RootStateType } from "../../redux/store";
 
 type propsFromRoute = {
   component: React.FC;
   path: string;
   exact: boolean;
-  isAuthenticated: boolean;
 };
 
-type Props = propsFromRoute;
+type Props = ReturnType<typeof mapStateToProps> &
+  typeof mapDispatchToProps &
+  propsFromRoute;
 
 const AuthRoute: React.FC<Props> = (props) => {
   const { isAuthenticated, component, path, exact } = props;
+
   return !isAuthenticated ? (
     <Redirect to="/login" />
   ) : (
@@ -19,4 +23,10 @@ const AuthRoute: React.FC<Props> = (props) => {
   );
 };
 
-export default AuthRoute;
+const mapStateToProps = (state: RootStateType) => ({
+  isAuthenticated: state.user.isAuthenticated
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthRoute);
