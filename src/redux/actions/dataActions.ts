@@ -11,7 +11,8 @@ import {
   UNLIKE_LIKE_SCREAM,
   SET_SCREAMS,
   IS_LOADING_DATA,
-  SetDataTypes
+  SetDataTypes,
+  DELETE_SCREAM
 } from "./../types";
 import { getUserData } from "./userAction";
 
@@ -67,6 +68,21 @@ export const unLikeScream = (screamId: string): AppThunk => (dispatch) => {
       });
 
       dispatch(getUserData());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// delete a scream
+export const deleteScream = (screamId: string): AppThunk => (dispatch) => {
+  axios
+    .delete(`${BASE_URL}/scream/${screamId}`)
+    .then(() => {
+      dispatch({
+        type: DELETE_SCREAM,
+        payload: screamId
+      });
     })
     .catch((err) => {
       console.error(err);
