@@ -19,8 +19,8 @@ import {
 import {
   UNAUTHENTICATED_USER,
   AUTHENTICATE_USER,
-  // IS_LOADING_UI,
-  // IS_LOADED_UI,
+  IS_LOADING_UI,
+  IS_LOADED_UI,
   CLEAR_ERROR,
   SET_ERROR,
   SET_USER,
@@ -48,10 +48,9 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
   dispatch
 ) => {
   try {
-    // setting UI to loading
-    dispatch({
-      type: LOADING_USER
-    });
+    // IS_LOADING_UI is necessary for login and sign up button
+    dispatch({ type: IS_LOADING_UI });
+    dispatch({ type: LOADING_USER });
     const user = await singInUser(userData);
     const { token } = user;
     // adding axios default header if token to use it other axis calls
@@ -65,6 +64,7 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
     dispatch(getUserData());
     // if there is any error in state clear it
     dispatch({ type: CLEAR_ERROR });
+    dispatch({ type: IS_LOADED_UI });
     // setting UI to loaded
   } catch (error) {
     if (error.response) {
@@ -73,9 +73,8 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
         payload: error.response.data
       });
       // setting UI to loaded
-      dispatch({
-        type: LOADED_USER
-      });
+      dispatch({ type: LOADED_USER });
+      dispatch({ type: IS_LOADED_UI });
     }
   }
 };
@@ -85,10 +84,9 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
   dispatch
 ) => {
   try {
-    // setting UI to loading
-    dispatch({
-      type: LOADING_USER
-    });
+    // IS_LOADING_UI is necessary for login and sign up button
+    dispatch({ type: IS_LOADING_UI });
+    dispatch({ type: LOADING_USER });
     const user = await signUpUser(newUserData);
     const { token } = user;
     // adding axios default header if token to use it other axis calls
@@ -102,6 +100,7 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
     dispatch(getUserData());
     // if there is any error in state clear it
     dispatch({ type: CLEAR_ERROR });
+    dispatch({ type: IS_LOADED_UI });
   } catch (error) {
     if (error.response) {
       dispatch({
@@ -109,9 +108,8 @@ export const createUser = (newUserData: SignUserType): AppThunk => async (
         payload: error.response.data
       });
       // setting UI to loaded
-      dispatch({
-        type: LOADED_USER
-      });
+      dispatch({ type: LOADED_USER });
+      dispatch({ type: IS_LOADED_UI });
     }
   }
 };
