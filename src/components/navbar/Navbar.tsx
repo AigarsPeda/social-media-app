@@ -6,8 +6,11 @@ import { connect } from "react-redux";
 import { logOutUser } from "../../redux/actions/userAction";
 import { RootStateType } from "../../redux/store";
 
-// components
-import Logo from "../../images/Logo";
+// icons
+import LogoIcon from "../../images/LogoIcon";
+import PlusIcon from "../../images/PlusIcon";
+import LogoutIcon from "../../images/LogoutIcon";
+import NotificationIcon from "../../images/NotificationIcon";
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
@@ -17,10 +20,20 @@ const Navbar: React.FC<Props> = (props) => {
     <nav className="navbar">
       <div className="container">
         <Link to="/" className="logo">
-          <Logo />
+          <LogoIcon />
         </Link>
         {isAuthenticated ? (
-          <button onClick={logOutUser}>Log Out</button>
+          <div className="action-btn-container">
+            <button>
+              <PlusIcon />
+            </button>
+            <button>
+              <NotificationIcon />
+            </button>
+            <button onClick={logOutUser}>
+              <LogoutIcon />
+            </button>
+          </div>
         ) : (
           <ul className="links">
             <li>
