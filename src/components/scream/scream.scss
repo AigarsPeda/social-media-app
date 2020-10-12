@@ -1,8 +1,9 @@
 .scream {
-  margin-top: 0.625rem;
+  padding: 1rem;
   display: flex;
+  margin-top: 0.625rem;
   background-color: $white;
-
+  position: relative;
   -webkit-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
@@ -13,33 +14,82 @@
 
   .img-container {
     padding: 0.625rem;
+
     img {
-      border-radius: 50%;
       width: 5rem;
       height: 5rem;
       display: block;
       object-fit: cover;
+      border-radius: 50%;
     }
   }
 
   .content-container {
+    position: relative;
     margin-left: 0.625rem;
 
     .user-handle {
-      font-size: 1.25rem;
       font-weight: 500;
+      font-size: 1.25rem;
       letter-spacing: 0.04rem;
       color: black;
     }
 
     .created-at {
-      font-size: 0.6875rem;
       opacity: 0.8;
+      font-size: 0.6875rem;
     }
 
     .body {
       font-weight: 400;
       font-size: 1.3rem;
+    }
+
+    .action-container {
+      display: flex;
+      margin-top: 1.8rem;
+
+      button {
+        border: none;
+        cursor: pointer;
+        padding-left: 0;
+        background-color: transparent;
+
+        &:focus {
+          outline: none;
+        }
+
+        svg {
+          width: 1rem;
+
+          &.like {
+            fill: $error;
+          }
+
+          &.comments {
+            fill: $secondary;
+          }
+        }
+      }
+
+      p {
+        margin-right: 0.625rem;
+      }
+    }
+  }
+
+  .delete-container {
+    margin-right: 0;
+    margin-left: auto;
+
+    .btn-delete {
+      border: none;
+      background-color: transparent;
+
+      svg {
+        width: 1rem;
+        fill: $error;
+      }
     }
   }
 }
