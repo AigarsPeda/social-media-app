@@ -1,88 +1,122 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 // redux
 import { connect } from "react-redux";
 import { RootStateType } from "../../redux/store";
+import { uploadImage } from "../../redux/actions/userAction";
 
-import Location from "../../images/Location";
+// icons
+import AtIcon from "../../images/AtIcon";
+import EditIcon from "../../images/EditIcon";
+import PencilIcon from "../../images/PencilIcon";
+import WebSiteIcon from "../../images/WebSiteIcon";
 import Spinner from "../spinner/Spinner";
-import WebSite from "../../images/WebSite";
-import Calendar from "../../images/Calendar";
-import At from "../../images/At";
-import Pencil from "../../images/Pencil";
+import LocationIcon from "../../images/LocationIcon";
+import CalendarIcon from "../../images/CalendarIcon";
+import BiographyIcon from "../../images/BiographyIcon";
+import EditDetails from "../editDetails/EditDetails";
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 const Profile: React.FC<Props> = (props) => {
-  const { user, isLoadingUser, isAuthenticated } = props;
+  const { user, isLoadingUser, uploadImage } = props;
+  const [isEditDetailsOpen, setIsEditDetailsOpen] = useState(false);
 
-  const profileMarkup = () => {
-    // nested ternary statements
-    return isLoadingUser ? (
-      <div className="spinner">
-        <Spinner />
-      </div>
-    ) : isAuthenticated ? (
-      <div className="container">
-        <div className="img-container">
-          <img src={user.imageUrl} />
-        </div>
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
 
-        <Link to={`/users/${user.handle}`}>
-          <h1>
-            <At />
-            {user.handle}
-          </h1>
-        </Link>
-        {user.bio && (
-          <p>
-            <Pencil className="icon" />
-            {user.bio}
-          </p>
-        )}
-        {user.location && (
-          <>
-            <p>
-              <Location className="icon" />
-              {user.location}
-            </p>
-          </>
-        )}
-        {user.website && (
-          <a href={user.website} target="_blank" rel="noopener noreferrer">
-            <p>
-              <WebSite className="icon" />
-              {user.website}
-            </p>
-          </a>
-        )}
-        <p>
-          <Calendar className="icon" />
-          Joined: {dayjs(user.createdAt).format("MMM YYYY")}
-        </p>
-      </div>
-    ) : (
-      <div>
-        <h3>No profile found, please login again</h3>
-        <div>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      </div>
-    );
+    const image = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image, image.name);
+
+    uploadImage(formData);
   };
 
-  return <div className="profile">{profileMarkup()}</div>;
+  const handleEditPicture = () => {
+    // Get input and click it. Witch calls "handleImageChange" Just to make styling easier
+    const fileInput = document.getElementById("imageInput");
+    if (!fileInput) {
+      return;
+    }
+    fileInput.click();
+  };
+
+  return (
+    <div className="profile">
+      {isLoadingUser ? (
+        <div className="spinner">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="container">
+          <div className="container-btn">
+            <button onClick={handleEditPicture}>
+              <PencilIcon className="icon" />
+            </button>
+            <button onClick={() => setIsEditDetailsOpen((state) => !state)}>
+              <EditIcon className="icon" />
+            </button>
+          </div>
+
+          <div className="img-container">
+            <img src={user.imageUrl} />
+            <input
+              type="file"
+              id="imageInput"
+              onChange={handleImageChange}
+              hidden
+            />
+          </div>
+          <Link to={`/users/${user.handle}`}>
+            <h1>
+              <AtIcon />
+              {user.handle}
+            </h1>
+          </Link>
+          <hr />
+          {user.bio && (
+            <p>
+              <BiographyIcon className="icon" /> {user.bio}
+            </p>
+          )}
+          {user.location && (
+            <>
+              <p>
+                <LocationIcon className="icon" />
+                {user.location}
+              </p>
+            </>
+          )}
+          {user.website && (
+            <a href={user.website} target="_blank" rel="noopener noreferrer">
+              <p>
+                <WebSiteIcon className="icon" />
+                {user.website}
+              </p>
+            </a>
+          )}
+          <p>
+            <CalendarIcon className="icon" />
+            Joined: {dayjs(user.createdAt).format("MMM YYYY")}
+          </p>
+        </div>
+      )}
+      {isEditDetailsOpen && (
+        <EditDetails setIsEditDetailsOpen={setIsEditDetailsOpen} />
+      )}
+    </div>
+  );
 };
 
 const mapStateToProps = (state: RootStateType) => ({
   user: state.user.userData.credentials,
-  isLoadingUser: state.user.isLoadingUser,
-  isAuthenticated: state.user.isAuthenticated
+  isLoadingUser: state.user.isLoadingUser
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { uploadImage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
