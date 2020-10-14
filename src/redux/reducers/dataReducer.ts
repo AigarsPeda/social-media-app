@@ -6,7 +6,9 @@ import {
   IS_LOADING_DATA,
   LIKE_SCREAM,
   UNLIKE_LIKE_SCREAM,
-  DELETE_SCREAM
+  DELETE_SCREAM,
+  POST_SCREAM,
+  SET_SCREAM
 } from "../types";
 
 export interface IUserInitialState {
@@ -37,6 +39,11 @@ export default (state = initialState, action: SetDataTypes) => {
         isLoadingData: false,
         screams: action.payload
       };
+    case SET_SCREAM:
+      return {
+        ...state,
+        scream: action.payload
+      };
 
     case IS_LOADING_DATA:
       return {
@@ -56,6 +63,12 @@ export default (state = initialState, action: SetDataTypes) => {
             return scream;
           }
         })
+      };
+
+    case POST_SCREAM:
+      return {
+        ...state,
+        screams: [action.payload, ...state.screams]
       };
 
     case DELETE_SCREAM:
