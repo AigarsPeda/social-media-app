@@ -11,20 +11,28 @@ import {
   UNLIKE_LIKE_SCREAM,
   SET_SCREAMS,
   IS_LOADING_DATA,
+  DELETE_SCREAM,
+  IS_LOADING_UI,
   SetDataTypes,
-  DELETE_SCREAM
+  SetLoadingUITypes,
+  POST_SCREAM,
+  SET_ERROR,
+  SetErrorActionTypes,
+  IS_LOADED_UI,
+  CLEAR_ERROR,
+  SET_SCREAM
 } from "./../types";
 import { getUserData } from "./userAction";
 
 type AppThunk<ReturnType = any> = ThunkAction<
   ReturnType,
   RootStateType,
-  SetDataTypes,
+  SetDataTypes | SetLoadingUITypes | SetErrorActionTypes,
   Action<string>
 >;
 
 // get all screams
-export const getScreams = (): AppThunk => async (dispatch) => {
+export const getScreams = (): AppThunk => (dispatch) => {
   dispatch({
     type: IS_LOADING_DATA
   });
@@ -38,6 +46,23 @@ export const getScreams = (): AppThunk => async (dispatch) => {
       });
     })
     .catch((err) => console.error(err));
+};
+
+// get scream
+export const getScream = (screamId: string): AppThunk => (dispatch) => {
+  dispatch({ type: IS_LOADING_UI });
+  axios
+    .get(`${BASE_URL}/scream/${screamId}`)
+    .then((res) => {
+      dispatch({
+        type: SET_SCREAM,
+        payload: res.data
+      });
+      dispatch({ type: IS_LOADED_UI });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // like a scream
@@ -71,6 +96,28 @@ export const unLikeScream = (screamId: string): AppThunk => (dispatch) => {
     })
     .catch((err) => {
       console.error(err);
+    });
+};
+
+// poste a scream
+export const postScream = (newScream: string): AppThunk => (dispatch) => {
+  dispatch({ type: IS_LOADING_UI });
+  axios
+    .post(`${BASE_URL}/scream`, { body: newScream })
+    .then((res) => {
+      dispatch({
+        type: POST_SCREAM,
+        payload: res.data
+      });
+      dispatch({ type: CLEAR_ERROR });
+      dispatch({ type: IS_LOADED_UI });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data
+      });
+      dispatch({ type: IS_LOADED_UI });
     });
 };
 
