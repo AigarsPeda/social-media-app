@@ -52,13 +52,6 @@ const EditDetails: React.FC<Props> = (props) => {
   return (
     <div className="edit-details">
       <form onSubmit={handleSubmit}>
-        <label>Bio</label>
-        <textarea
-          rows={3}
-          value={userDetails.bio}
-          name="bio"
-          onChange={handleChange}
-        />
         <label>Website</label>
         <input
           value={userDetails.website}
@@ -69,6 +62,13 @@ const EditDetails: React.FC<Props> = (props) => {
         <input
           value={userDetails.location}
           name="location"
+          onChange={handleChange}
+        />
+        <label>Bio</label>
+        <textarea
+          rows={3}
+          value={userDetails.bio}
+          name="bio"
           onChange={handleChange}
         />
         <div className="btn-container">
