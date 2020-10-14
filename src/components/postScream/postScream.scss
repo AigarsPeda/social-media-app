@@ -2,6 +2,7 @@
   display: inline;
 
   button {
+    cursor: pointer;
     border: none;
     background-color: transparent;
     color: $white;
@@ -24,63 +25,114 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    padding-top: 4.6rem;
+    background: rgba(63, 94, 251, 0.5);
+    background: linear-gradient(
+      180deg,
+      rgba(38, 74, 255, 0.3) 26%,
+      rgba(252, 70, 107, 0.2) 100%
+    );
 
-    // background-color: aqua;
+    &.toggleOut {
+      animation: fadeout 500ms;
+      opacity: 0;
+    }
 
     form {
-      padding: 1.5rem 0.6rem;
-      max-width: 30rem;
-      margin-top: 4.6rem;
-      margin-left: auto;
+      padding: 1.6rem 1.8rem 4rem 1.8rem;
+      max-width: 35rem;
+
+      margin: auto;
       margin-right: auto;
       background-color: $white;
-      -webkit-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
-      -moz-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
-      box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
+      border-radius: 25px;
+      box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+      -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+      -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
 
-      animation: slideDown 0.4s;
+      &.toggleIn {
+        animation: slideDown 500ms;
+        opacity: 1;
+      }
 
-      label {
-        color: rgba(0, 0, 0, 1);
-        font-size: 1.5rem;
+      &.toggleOut {
+        animation: fadeout 500ms;
+        opacity: 0;
+      }
+
+      h2 {
+        font-size: 2rem;
         letter-spacing: 0.0625rem;
-        font-weight: 500;
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+        margin-bottom: 10px;
       }
 
       textarea {
-        font-size: 1.125rem;
+        font-size: 1.1rem;
         margin-bottom: 1rem;
-        border: 0.0625rem solid $text;
+        border: 0.09rem solid $secondary;
         background: transparent;
         display: block;
         width: 99%;
         margin: auto;
+        resize: vertical;
+        border-radius: 0.3rem;
+
+        &:focus {
+          outline: none;
+        }
       }
 
-      .action-btn-container {
-        text-align: center;
-        margin: 0.6rem;
+      .cancel {
+        width: 100%;
+        text-align: right;
 
-        button {
-          width: 9rem;
-          height: 2.5rem;
-          margin: 0.3rem;
-          color: $white;
-          font-size: 0.9rem;
-          font-weight: 600;
-          letter-spacing: 0.07rem;
+        span {
+          cursor: pointer;
 
-          &.add-scream {
-            background-color: $green;
-          }
-
-          &.cancel {
-            background-color: $error;
+          svg {
+            fill: $error;
+            width: 1.2rem;
+            margin-bottom: 0.6rem;
           }
         }
       }
+
+      button {
+        width: 7.2rem;
+        border-radius: 1.5rem;
+        height: 2.5rem;
+        color: $white;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.07rem;
+
+        &.add-scream {
+          margin: 0;
+          margin-top: 1rem;
+          border: $primary;
+          background-color: $primary;
+
+          box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+          -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+          -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+        }
+      }
     }
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
   }
 }
 
