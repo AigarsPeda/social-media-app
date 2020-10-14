@@ -97,6 +97,18 @@ interface IUnLikeScreamAction {
   payload: ScreamType;
 }
 
+export const POST_SCREAM = "POST_SCREAM";
+interface IPostScreamAction {
+  type: typeof POST_SCREAM;
+  payload: ScreamType;
+}
+
+export const DELETE_SCREAM = "DELETE_SCREAM";
+interface IDeleteScreamAction {
+  type: typeof DELETE_SCREAM;
+  payload: string;
+}
+
 export const CLEAR_DATA = "CLEAR_DATA";
 interface IClearDataAction {
   type: typeof CLEAR_DATA;
@@ -109,4 +121,6 @@ export type SetDataTypes =
   | IIsLoadingDataAction
   | ILikeScreamAction
   | IUnLikeScreamAction
-  | IClearDataAction;
+  | IClearDataAction
+  | IDeleteScreamAction
+  | IPostScreamAction;

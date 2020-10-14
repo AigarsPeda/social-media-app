@@ -14,6 +14,7 @@ export type ErrorsType = {
   email?: string;
   handel?: string;
   confirmPassword?: string;
+  body?: string;
 };
 
 export type TokenType = {
