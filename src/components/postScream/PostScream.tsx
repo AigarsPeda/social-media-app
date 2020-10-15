@@ -16,7 +16,7 @@ type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 const PostScream: React.FC<Props> = (props) => {
   const { isLoading, errors, postScream, clearErrors } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   const [screamBody, setScreamBody] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,6 +45,7 @@ const PostScream: React.FC<Props> = (props) => {
     }, 500);
   };
 
+  // handle click outside form to close modal
   const handleOutClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const element = e.target as HTMLDivElement;
 
@@ -68,14 +69,10 @@ const PostScream: React.FC<Props> = (props) => {
         <PlusIcon />
       </button>
       {isOpen && (
-        <div
-          className={toggle ? "add-scream-modal" : "add-scream-modal toggleOut"}
-          onClick={handleOutClick}
-        >
+        <div className="add-scream-modal" onClick={handleOutClick}>
           <form
             onSubmit={handleSubmit}
-            // className={toggle ? "toggleIn" : "toggleOut"}
-            className="toggleIn"
+            className={toggle ? "toggleIn" : "toggleOut"}
           >
             {!isLoading && (
               <div className="cancel">
