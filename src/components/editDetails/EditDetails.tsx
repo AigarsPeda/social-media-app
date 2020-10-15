@@ -7,17 +7,19 @@ import { UserDetailsType } from "../../types/types";
 import { connect } from "react-redux";
 import { editUserDetails } from "../../redux/actions/userAction";
 import { RootStateType } from "../../redux/store";
+import EditIcon from "../../images/EditIcon";
+import CancelIcon from "../../images/CancelIcon";
 
-type MyProps = {
-  setIsEditDetailsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+// type MyProps = {
+//   setIsEditDetailsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+// };
 
-type Props = ReturnType<typeof mapStateToProps> &
-  typeof mapDispatchToProps &
-  MyProps;
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 const EditDetails: React.FC<Props> = (props) => {
-  const { editUserDetails, setIsEditDetailsOpen, user } = props;
+  const { editUserDetails, user } = props;
+  const [isOpen, setIsOpen] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const [userDetails, setUserDetails] = useState<UserDetailsType>({
     bio: "",
     website: "",
@@ -33,6 +35,15 @@ const EditDetails: React.FC<Props> = (props) => {
     });
   }, [user]);
 
+  const handleCancel = () => {
+    setToggle(false);
+    // setIsOpen(false);
+
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 500);
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -45,48 +56,79 @@ const EditDetails: React.FC<Props> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    editUserDetails(userDetails);
-    setIsEditDetailsOpen(false);
+
+    setToggle(false);
+    setTimeout(() => {
+      editUserDetails(userDetails);
+      setIsOpen(false);
+    }, 500);
+  };
+
+  const handleOutClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const element = e.target as HTMLDivElement;
+
+    if (element.classList.contains("edit-details-modal")) {
+      setToggle(false);
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 500);
+    }
+  };
+
+  const handleOpen = () => {
+    setIsOpen(true);
+    setToggle(true);
   };
 
   return (
     <div className="edit-details">
-      <form onSubmit={handleSubmit}>
-        <label>Website</label>
-        <input
-          value={userDetails.website}
-          name="website"
-          onChange={handleChange}
-        />
-        <label>Locations</label>
-        <input
-          value={userDetails.location}
-          name="location"
-          onChange={handleChange}
-        />
-        <label>Bio</label>
-        <textarea
-          rows={3}
-          value={userDetails.bio}
-          name="bio"
-          onChange={handleChange}
-        />
-        <div className="btn-container">
-          <button type="submit" className="btn primary">
-            Save
-          </button>
-          <button className="btn" onClick={() => setIsEditDetailsOpen(false)}>
-            Cancel
-          </button>
+      <button onClick={handleOpen}>
+        <EditIcon className="icon" />
+      </button>
+      {isOpen && (
+        <div className="edit-details-modal" onClick={handleOutClick}>
+          <form
+            onSubmit={handleSubmit}
+            className={toggle ? "toggleIn" : "toggleOut"}
+          >
+            <div className="cancel">
+              <span onClick={handleCancel}>
+                <CancelIcon />
+              </span>
+            </div>
+            <label>Website</label>
+            <input
+              value={userDetails.website}
+              name="website"
+              onChange={handleChange}
+            />
+            <label>Locations</label>
+            <input
+              value={userDetails.location}
+              name="location"
+              onChange={handleChange}
+            />
+            <label>Bio</label>
+            <textarea
+              rows={3}
+              value={userDetails.bio}
+              name="bio"
+              onChange={handleChange}
+            />
+            <div className="btn-container">
+              <button type="submit" className="btn primary">
+                Save
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = (state: RootStateType) => ({
-  user: state.user.userData.credentials,
-  isLoadingUser: state.user.isLoadingUser
+  user: state.user.userData.credentials
 });
 
 const mapDispatchToProps = { editUserDetails };
