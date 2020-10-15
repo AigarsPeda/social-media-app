@@ -16,6 +16,7 @@ type Props = ReturnType<typeof mapStateToProps> &
 
 const DeleteScream: React.FC<Props> = (props) => {
   const { screamId, deleteScream } = props;
+  const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = (id: string) => {
@@ -23,19 +24,51 @@ const DeleteScream: React.FC<Props> = (props) => {
     deleteScream(id);
   };
 
+  const handleOpen = () => {
+    setIsOpen(true);
+    setToggle(true);
+  };
+
+  const handleCancel = () => {
+    setToggle(false);
+    // setIsOpen(false);
+
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 500);
+  };
+
+  const handleDeleteScream = (id: string) => {
+    setToggle(false);
+
+    setTimeout(() => {
+      handleDelete(id);
+      setIsOpen(false);
+    }, 500);
+  };
+
   return (
     <div className="delete-scream">
-      <button onClick={() => setIsOpen((state) => !state)}>
+      <button onClick={handleOpen}>
         <TrashCanIcon />
       </button>
       {isOpen && (
         <div className="delete-modal">
-          <div className="delete-modal-actions">
+          <div
+            className={
+              toggle
+                ? "delete-modal-actions toggleIn"
+                : "delete-modal-actions toggleOut"
+            }
+          >
             <h2>Are you sure you want to delete this scream?</h2>
-            <button className="cancel" onClick={() => setIsOpen(false)}>
+            <button className="cancel" onClick={handleCancel}>
               Cancel
             </button>
-            <button className="delete" onClick={() => handleDelete(screamId)}>
+            <button
+              className="delete"
+              onClick={() => handleDeleteScream(screamId)}
+            >
               Delete
             </button>
           </div>
