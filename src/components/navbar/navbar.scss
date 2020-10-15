@@ -1,7 +1,7 @@
 .navbar {
   position: sticky;
   width: 100%;
-  background-color: $primary;
+  background-color: $blue;
   box-shadow: 0px 3px 5px -2px $RGBAPrimary;
   -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
   -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
@@ -9,6 +9,7 @@
 
   .container {
     max-width: 75rem;
+    height: 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
