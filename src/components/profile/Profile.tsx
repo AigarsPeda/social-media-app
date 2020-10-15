@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
@@ -9,20 +9,20 @@ import { uploadImage } from "../../redux/actions/userAction";
 
 // icons
 import AtIcon from "../../images/AtIcon";
-import EditIcon from "../../images/EditIcon";
 import PencilIcon from "../../images/PencilIcon";
+import EditDetails from "../editDetails/EditDetails";
 import WebSiteIcon from "../../images/WebSiteIcon";
-import Spinner from "../spinner/Spinner";
 import LocationIcon from "../../images/LocationIcon";
 import CalendarIcon from "../../images/CalendarIcon";
 import BiographyIcon from "../../images/BiographyIcon";
-import EditDetails from "../editDetails/EditDetails";
+
+// components
+import Spinner from "../spinner/Spinner";
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 const Profile: React.FC<Props> = (props) => {
   const { user, isLoadingUser, uploadImage } = props;
-  const [isEditDetailsOpen, setIsEditDetailsOpen] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
@@ -57,9 +57,7 @@ const Profile: React.FC<Props> = (props) => {
             <button onClick={handleEditPicture}>
               <PencilIcon className="icon" />
             </button>
-            <button onClick={() => setIsEditDetailsOpen((state) => !state)}>
-              <EditIcon className="icon" />
-            </button>
+            <EditDetails />
           </div>
 
           <div className="img-container">
@@ -104,9 +102,6 @@ const Profile: React.FC<Props> = (props) => {
             Joined: {dayjs(user.createdAt).format("MMM YYYY")}
           </p>
         </div>
-      )}
-      {isEditDetailsOpen && (
-        <EditDetails setIsEditDetailsOpen={setIsEditDetailsOpen} />
       )}
     </div>
   );
