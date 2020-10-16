@@ -157,9 +157,9 @@ export const uploadImage = (formData: FormData): AppThunk => (dispatch) => {
 export const editUserDetails = (userDetails: UserDetailsType): AppThunk => (
   dispatch
 ) => {
-  dispatch({
-    type: LOADING_USER
-  });
+  // dispatch({
+  //   type: LOADING_USER
+  // });
   axios
     .post(`${BASE_URL}/user`, userDetails)
     .then(() => {
