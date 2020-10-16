@@ -7,6 +7,8 @@ import { UserDetailsType } from "../../types/types";
 import { connect } from "react-redux";
 import { editUserDetails } from "../../redux/actions/userAction";
 import { RootStateType } from "../../redux/store";
+
+// icons
 import EditIcon from "../../images/EditIcon";
 import CancelIcon from "../../images/CancelIcon";
 
@@ -56,10 +58,10 @@ const EditDetails: React.FC<Props> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    editUserDetails(userDetails);
 
     setToggle(false);
     setTimeout(() => {
-      editUserDetails(userDetails);
       setIsOpen(false);
     }, 500);
   };
