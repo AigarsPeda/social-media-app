@@ -7,7 +7,7 @@ import { RootStateType } from "../../redux/store";
 import { logInUser } from "../../redux/actions/userAction";
 
 // components
-import Logo from "../../images/Logo";
+import LogoIcon from "../../images/LogoIcon";
 import Spinner from "../../components/spinner/Spinner";
 import Input from "../../components/reusable/Input";
 
@@ -43,7 +43,7 @@ const Login: React.FC<Props> = (props) => {
   return (
     <div className="login">
       <div className="logo">
-        <Logo />
+        <LogoIcon />
       </div>
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
