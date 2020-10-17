@@ -9,7 +9,7 @@ import { createUser } from "../../redux/actions/userAction";
 import { RootStateType } from "../../redux/store";
 
 // components
-import Logo from "../../images/Logo";
+import LogoIcon from "../../images/LogoIcon";
 import Spinner from "../../components/spinner/Spinner";
 import Input from "../../components/reusable/Input";
 
@@ -49,7 +49,7 @@ const SignUp: React.FC<Props> = (props) => {
   return (
     <div className="signup">
       <div className="logo">
-        <Logo />
+        <LogoIcon />
       </div>
       <form onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
