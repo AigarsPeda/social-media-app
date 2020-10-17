@@ -1,0 +1,19 @@
+.like-unlike-btn {
+  button {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.like {
+      fill: $error;
+    }
+
+    svg {
+      width: 1rem;
+    }
+  }
+}
