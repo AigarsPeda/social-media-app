@@ -24,7 +24,7 @@ import {
 } from "./../types";
 import { getUserData } from "./userAction";
 
-type AppThunk<ReturnType = any> = ThunkAction<
+export type DataActionThunk<ReturnType = any> = ThunkAction<
   ReturnType,
   RootStateType,
   SetDataTypes | SetLoadingUITypes | SetErrorActionTypes,
@@ -32,7 +32,7 @@ type AppThunk<ReturnType = any> = ThunkAction<
 >;
 
 // get all screams
-export const getScreams = (): AppThunk => (dispatch) => {
+export const getScreams = (): DataActionThunk => (dispatch) => {
   dispatch({
     type: IS_LOADING_DATA
   });
@@ -49,7 +49,7 @@ export const getScreams = (): AppThunk => (dispatch) => {
 };
 
 // get scream
-export const getScream = (screamId: string): AppThunk => (dispatch) => {
+export const getScream = (screamId: string): DataActionThunk => (dispatch) => {
   dispatch({ type: IS_LOADING_UI });
   axios
     .get(`${BASE_URL}/scream/${screamId}`)
@@ -66,7 +66,7 @@ export const getScream = (screamId: string): AppThunk => (dispatch) => {
 };
 
 // like a scream
-export const likeScream = (screamId: string): AppThunk => (dispatch) => {
+export const likeScream = (screamId: string): DataActionThunk => (dispatch) => {
   axios
     .post(`${BASE_URL}/scream/${screamId}/like`)
     .then((res) => {
@@ -83,7 +83,9 @@ export const likeScream = (screamId: string): AppThunk => (dispatch) => {
 };
 
 // unlike a scream
-export const unLikeScream = (screamId: string): AppThunk => (dispatch) => {
+export const unLikeScream = (screamId: string): DataActionThunk => (
+  dispatch
+) => {
   axios
     .post(`${BASE_URL}/scream/${screamId}/unlike`)
     .then((res) => {
@@ -100,7 +102,9 @@ export const unLikeScream = (screamId: string): AppThunk => (dispatch) => {
 };
 
 // poste a scream
-export const postScream = (newScream: string): AppThunk => (dispatch) => {
+export const postScream = (newScream: string): DataActionThunk => (
+  dispatch
+) => {
   dispatch({ type: IS_LOADING_UI });
   axios
     .post(`${BASE_URL}/scream`, { body: newScream })
@@ -122,7 +126,9 @@ export const postScream = (newScream: string): AppThunk => (dispatch) => {
 };
 
 // delete a scream
-export const deleteScream = (screamId: string): AppThunk => (dispatch) => {
+export const deleteScream = (screamId: string): DataActionThunk => (
+  dispatch
+) => {
   axios
     .delete(`${BASE_URL}/scream/${screamId}`)
     .then(() => {
