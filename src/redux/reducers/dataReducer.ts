@@ -62,7 +62,11 @@ export default (state = initialState, action: SetDataTypes) => {
           } else {
             return scream;
           }
-        })
+        }),
+        scream:
+          state.scream.screamId === action.payload.screamId
+            ? action.payload
+            : state.scream
       };
 
     case POST_SCREAM:
