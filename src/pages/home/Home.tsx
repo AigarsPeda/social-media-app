@@ -1,51 +1,42 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 
-// constants
-import { BASE_URL } from "../../constant";
-
-// types
-import { ScreamType } from "../../types/types";
+// redux
+import { connect } from "react-redux";
+import { getScreams } from "../../redux/actions/dataActions";
+import { RootStateType } from "../../redux/store";
 
 // components
 import Scream from "../../components/scream/Scream";
 import Spinner from "../../components/spinner/Spinner";
 import Profile from "../../components/profile/Profile";
 
-const Home: React.FC = () => {
-  const [screams, setScreams] = useState<ScreamType[]>([]);
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
+
+const Home: React.FC<Props> = (props) => {
+  const { isLoadingData, screams, getScreams } = props;
+  // const [screams, setScreams] = useState<ScreamType[]>([]);
 
   useEffect(() => {
     let mounted = true;
 
-    const loadData = async () => {
-      const response = await axios
-        .get(`${BASE_URL}/screams`)
-        // destruction data property from res
-        .then((res) => res.data)
-        .catch((err) => console.error(err));
-
-      // check if components is still mounted
-      if (mounted) {
-        setScreams(response);
-      }
-    };
-
-    loadData();
+    // don't call this function if component is unmounted
+    if (mounted) {
+      getScreams();
+    }
 
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [getScreams]);
 
-  const recentScreamMarkup = screams.length ? (
-    screams.map((scream) => {
-      return <Scream key={scream.screamId} scream={scream} />;
-    })
-  ) : (
+  const recentScreamMarkup = isLoadingData ? (
     <div className="spinner">
       <Spinner />
     </div>
+  ) : (
+    screams.map((scream) => {
+      return <Scream key={scream.screamId} scream={scream} />;
+    })
   );
 
   return (
@@ -56,4 +47,11 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state: RootStateType) => ({
+  isLoadingData: state.data.isLoadingData,
+  screams: state.data.screams
+});
+
+const mapDispatchToProps = { getScreams };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
