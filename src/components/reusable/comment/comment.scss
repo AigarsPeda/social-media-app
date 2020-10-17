@@ -1,0 +1,11 @@
+.comment {
+  button {
+    background: transparent;
+    border: none;
+
+    svg {
+      fill: $primary;
+      width: 1rem;
+    }
+  }
+}
