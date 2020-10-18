@@ -1,0 +1,20 @@
+.display-comments {
+  .comments {
+    display: grid;
+    grid-template-columns: 0.4fr 1.6fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+  }
+
+  .content-container {
+    text-align: left;
+
+    .comment-body {
+      font-size: 1.2rem;
+    }
+
+    .created-at {
+      font-size: 0.7rem;
+    }
+  }
+}
