@@ -7,21 +7,21 @@ import { ThunkAction } from "redux-thunk";
 // types
 import { RootStateType } from "../store";
 import {
-  LIKE_SCREAM,
-  UNLIKE_LIKE_SCREAM,
-  SET_SCREAMS,
-  IS_LOADING_DATA,
+  CLEAR_ERROR,
   DELETE_SCREAM,
+  IS_LOADED_UI,
+  IS_LOADING_DATA,
   IS_LOADING_UI,
-  SetDataTypes,
-  SetLoadingUITypes,
+  LIKE_SCREAM,
   POST_SCREAM,
   SET_ERROR,
+  SET_SCREAM,
+  SET_SCREAMS,
+  SetDataTypes,
   SetErrorActionTypes,
-  IS_LOADED_UI,
-  CLEAR_ERROR,
-  SET_SCREAM
-} from "./../types";
+  SetLoadingUITypes,
+  UNLIKE_LIKE_SCREAM
+} from "../types";
 import { getUserData } from "./userAction";
 
 export type DataActionThunk<ReturnType = any> = ThunkAction<
@@ -101,7 +101,7 @@ export const unLikeScream = (screamId: string): DataActionThunk => (
     });
 };
 
-// poste a scream
+// post a scream
 export const postScream = (newScream: string): DataActionThunk => (
   dispatch
 ) => {
