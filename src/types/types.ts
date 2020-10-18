@@ -6,6 +6,7 @@ export type ScreamType = {
   screamId: string;
   userHandle: string;
   userImage: string;
+  comments: ScreamComment[];
 };
 
 export type ErrorsType = {
@@ -74,4 +75,12 @@ export type UserDetailsType = {
   bio: string;
   website: string;
   location: string;
+};
+
+export type ScreamComment = {
+  body: string;
+  createdAt: string;
+  screamId: string;
+  userHandle: string;
+  userImage: string;
 };
