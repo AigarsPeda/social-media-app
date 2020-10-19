@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
+
+// redux
 import { Link } from "react-router-dom";
 import { ScreamComment } from "../../types/types";
 import { RootStateType } from "../../redux/store";
 import { connect } from "react-redux";
 import { submitComment } from "../../redux/actions/dataActions";
-import Input from "../reusable/Input";
+
+// component
+import AddComment from "../addComment/addComment";
 
 type MyProps = {
   comments: ScreamComment[];
@@ -31,22 +35,14 @@ const DisplayComments: React.FC<Props> = (props) => {
 
   return (
     <div className="display-comments">
-      <div className="add-comment">
-        <form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            autoComplete="off"
-            value={commentBody}
-            error={errors.comment}
-            errorClass="errors"
-            name="commentBody"
-            placeholder="Add Comment!"
-            handleInputChange={handleInputChange}
-          />
-          {errors.comment && <p>{errors.comment}</p>}
-          <button type="submit">Add Comment</button>
-        </form>
-      </div>
+      <AddComment
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+        error={errors.comment}
+        commentBody={commentBody}
+        name="commentBody"
+      />
+
       {comments && comments.length ? (
         comments.map((comment, index) => {
           const { createdAt, userHandle, userImage, body } = comment;
