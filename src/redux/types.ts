@@ -1,4 +1,9 @@
-import { ErrorsType, ScreamType, UserDataType } from "../types/types";
+import {
+  ErrorsType,
+  ScreamComment,
+  ScreamType,
+  UserDataType
+} from "../types/types";
 
 // USER
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
@@ -109,6 +114,12 @@ interface IDeleteScreamAction {
   payload: string;
 }
 
+export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
+interface ISubmitCommentAction {
+  type: typeof SUBMIT_COMMENT;
+  payload: ScreamComment;
+}
+
 export const CLEAR_DATA = "CLEAR_DATA";
 interface IClearDataAction {
   type: typeof CLEAR_DATA;
@@ -123,4 +134,5 @@ export type SetDataTypes =
   | IUnLikeScreamAction
   | IClearDataAction
   | IDeleteScreamAction
-  | IPostScreamAction;
+  | IPostScreamAction
+  | ISubmitCommentAction;
