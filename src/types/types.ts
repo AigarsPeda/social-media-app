@@ -16,6 +16,7 @@ export type ErrorsType = {
   handel?: string;
   confirmPassword?: string;
   body?: string;
+  comment?: string;
 };
 
 export type TokenType = {
