@@ -20,7 +20,8 @@ import {
   SetDataTypes,
   SetErrorActionTypes,
   SetLoadingUITypes,
-  UNLIKE_LIKE_SCREAM
+  UNLIKE_LIKE_SCREAM,
+  SUBMIT_COMMENT
 } from "../types";
 import { getUserData } from "./userAction";
 
@@ -138,6 +139,26 @@ export const deleteScream = (screamId: string): DataActionThunk => (
       });
     })
     .catch((err) => {
+      console.error(err);
+    });
+};
+
+// post comment
+export const submitComment = (
+  screamId: string,
+  commentData: string
+): DataActionThunk => (dispatch) => {
+  axios
+    .post(`${BASE_URL}/scream/${screamId}/comment`, { body: commentData })
+    .then((res) => {
+      dispatch({ type: SUBMIT_COMMENT, payload: res.data });
+      dispatch({ type: CLEAR_ERROR });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data
+      });
       console.error(err);
     });
 };
