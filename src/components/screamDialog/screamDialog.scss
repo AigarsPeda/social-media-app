@@ -19,42 +19,104 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
     z-index: 16;
+    background: rgba(63, 94, 251, 0.8);
+    background: linear-gradient(
+      180deg,
+      rgba(38, 74, 255, 0.8) 26%,
+      rgba(252, 70, 107, 0.6) 100%
+    );
+    text-align: -webkit-center;
+    overflow: auto;
 
     .dialog-content {
       display: flex;
       flex-direction: column;
       position: relative;
-      top: 20%;
-      margin-top: 5rem;
-      margin: auto;
-      max-width: 31.25rem;
-      padding: 4rem 1rem;
+      top: 5%;
+      margin: 0.3rem;
+      padding: 1.6rem 1.8rem 3rem 1.8rem;
+      max-width: 35rem;
       background-color: $white;
-      -webkit-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
-      -moz-box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
-      box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.4);
+      border-radius: 1.5rem;
+      box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+      -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+      -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
 
-      animation: slideDown 0.4s;
-    }
+      &.toggleIn {
+        animation: slideDown 500ms;
+      }
 
-    .my-animation {
-      animation: fade 3s steps(90) forwards;
-      -webkit-animation: fade 3s steps(90) forwards;
-      -moz-animation: fade 3s steps(90) forwards;
+      &.toggleOut {
+        animation: slideUp 500ms;
+      }
+
+      .cancel {
+        text-align: right;
+        span {
+          svg {
+            cursor: pointer;
+            width: 1.2rem;
+            fill: $error;
+          }
+        }
+      }
+
+      .main {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+
+        .scream-dialog-img {
+          img {
+            width: 9rem;
+            height: 9rem;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+
+        a {
+          color: $blue;
+          font-size: 1.5rem;
+          font-weight: 600;
+          letter-spacing: 0.03rem;
+        }
+
+        .content-container {
+          text-align: left;
+
+          section {
+            .body {
+              font-size: 1.7rem;
+              margin-top: 1rem;
+              margin-bottom: 1.5rem;
+            }
+
+            .like-comment-container {
+              display: flex;
+              svg {
+                width: 1.5rem;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
 
-@keyframes fade {
-  from {
-    opacity: 1;
+@keyframes slideUp {
+  0% {
+    transform: translateY(0%);
   }
-  to {
-    opacity: 0;
+  100% {
+    transform: translateY(-500%);
   }
 }
 
