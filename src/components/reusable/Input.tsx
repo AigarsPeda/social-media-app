@@ -5,6 +5,7 @@ interface Props {
   error?: string;
   errorClass?: string;
   labelTitle?: string;
+  placeholder?: string;
   value: string;
   name: string;
   type: string;
@@ -20,6 +21,7 @@ const Input: React.FC<Props> = (props) => {
     labelTitle,
     value,
     name,
+    placeholder,
     type,
     autoComplete = "on",
     handleInputChange
@@ -34,6 +36,7 @@ const Input: React.FC<Props> = (props) => {
         name={name}
         onChange={handleInputChange}
         value={value}
+        placeholder={placeholder}
       />
     </>
   );
