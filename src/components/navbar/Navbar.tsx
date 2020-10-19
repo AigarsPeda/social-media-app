@@ -10,6 +10,8 @@ import { RootStateType } from "../../redux/store";
 import LogoIcon from "../../images/LogoIcon";
 import LogoutIcon from "../../images/LogoutIcon";
 import NotificationIcon from "../../images/NotificationIcon";
+
+// components
 import PostScream from "../postScream/PostScream";
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
