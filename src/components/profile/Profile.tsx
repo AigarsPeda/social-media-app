@@ -78,7 +78,7 @@ const Profile: React.FC<Props> = (props) => {
           <hr />
           {user.bio && (
             <p>
-              <BiographyIcon className="icon" /> {user.bio}
+              <BiographyIcon className="icon bio" /> {user.bio}
             </p>
           )}
           {user.location && (
