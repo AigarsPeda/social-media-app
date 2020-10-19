@@ -11,10 +11,12 @@ import { dateFormatted } from "../../helpers/dateFormatted";
 import { connect } from "react-redux";
 import { RootStateType } from "../../redux/store";
 import { likeScream, unLikeScream } from "../../redux/actions/dataActions";
-import EmptyLikeIcon from "../../images/EmptyLikeIcon";
-import LikeIcon from "../../images/LikeIcon";
-import CommentIcon from "../../images/CommentIcon";
-import TrashCanIcon from "../../images/TrashCanIcon";
+
+// components
+import Comment from "../reusable/comment/Comment";
+import DeleteScream from "../deleteScream/DeleteScream";
+import ScreamDialog from "../screamDialog/ScreamDialog";
+import LikeAndUnlikeButton from "../reusable/likeAndUnlikeButton/LikeAndUnlikeButton";
 
 type MyProps = {
   scream: ScreamType;
@@ -35,30 +37,6 @@ const Scream: React.FC<Props> = (props) => {
     commentCount
   } = scream;
 
-  // TODO: disable button if user already liked scream
-  // and show different icon
-
-  const isLikedScream = (id: string) => {
-    const { likes } = user.userData;
-    if (likes.length && likes.find((like) => like.screamId === id)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const likeAndUnlikeButton = () => {
-    return !isLikedScream(screamId) ? (
-      <button onClick={() => likeScream(screamId)}>
-        <EmptyLikeIcon />
-      </button>
-    ) : (
-      <button onClick={() => unLikeScream(screamId)}>
-        <LikeIcon className="like" />
-      </button>
-    );
-  };
-
   const isOwner = () => {
     if (user.userData.credentials.handle === userHandle) {
       return true;
@@ -67,42 +45,44 @@ const Scream: React.FC<Props> = (props) => {
     }
   };
 
-  const deleteButton = () => {
-    return isOwner() ? (
-      <button className="btn-delete">
-        <TrashCanIcon />
-      </button>
-    ) : null;
+  const deleteButton = (screamId: string) => {
+    return isOwner() ? <DeleteScream screamId={screamId} /> : null;
   };
 
   return (
     <div className="scream">
-      {console.log("Scream:", scream)}
-      {console.log("User: ", user.userData.likes)}
-      <div className="img-container">
-        <img src={userImage} />
-      </div>
-      <div className="content-container">
-        <Link to={`/users/${userHandle}`} className="user-handle">
-          {userHandle}
-        </Link>
+      <div className="scream-card">
+        <div className="img-container">
+          <img src={userImage} />
+        </div>
+        <div className="content-container">
+          <Link to={`/users/${userHandle}`} className="user-handle">
+            {userHandle}
+          </Link>
 
-        <p className="created-at">{dateFormatted(createdAt)}</p>
-        <p className="body">{body}</p>
-        <div className="action-container">
-          <p>
-            {likeAndUnlikeButton()}
-            {likeCount} Likes
-          </p>
-          <p>
-            <button>
-              <CommentIcon className="comments" />
-            </button>
-            {commentCount} Comments
-          </p>
+          <p className="created-at">{dateFormatted(createdAt)}</p>
+          <p className="body">{body}</p>
+          <div className="action-container">
+            <div className="like-container">
+              <LikeAndUnlikeButton
+                likes={user.userData.likes}
+                id={screamId}
+                likeScream={likeScream}
+                unLikeScream={unLikeScream}
+              />
+              {likeCount} likes
+            </div>
+            <div className="comment-container">
+              <Comment />
+              {commentCount} Comments
+            </div>
+          </div>
+        </div>
+        <div className="delete-container">
+          {deleteButton(screamId)}
+          <ScreamDialog screamId={screamId} userHandle={userHandle} />
         </div>
       </div>
-      <div className="delete-container">{deleteButton()}</div>
     </div>
   );
 };
