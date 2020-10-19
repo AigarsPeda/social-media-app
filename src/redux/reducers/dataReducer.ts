@@ -8,7 +8,8 @@ import {
   UNLIKE_LIKE_SCREAM,
   DELETE_SCREAM,
   POST_SCREAM,
-  SET_SCREAM
+  SET_SCREAM,
+  SUBMIT_COMMENT
 } from "../types";
 
 export interface IUserInitialState {
@@ -27,7 +28,8 @@ const initialState: IUserInitialState = {
     likeCount: 0,
     screamId: "",
     userHandle: "",
-    userImage: ""
+    userImage: "",
+    comments: []
   }
 };
 
@@ -63,10 +65,11 @@ export default (state = initialState, action: SetDataTypes) => {
             return scream;
           }
         }),
-        scream:
+        ...state.scream,
+        likeCount:
           state.scream.screamId === action.payload.screamId
-            ? action.payload
-            : state.scream
+            ? action.payload.likeCount
+            : state.scream.likeCount
       };
 
     case POST_SCREAM:
@@ -81,6 +84,17 @@ export default (state = initialState, action: SetDataTypes) => {
         screams: state.screams.filter((scream) => {
           return scream.screamId !== action.payload;
         })
+      };
+
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        scream: {
+          ...state.scream,
+          comments: [action.payload, ...state.scream.comments]
+        }
+        // ...state.scream,
+        // comments: [action.payload, ...state.scream.comments]
       };
 
     case CLEAR_DATA: {
