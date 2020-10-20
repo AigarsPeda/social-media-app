@@ -25,7 +25,6 @@
     border-radius: 1.5rem;
 
     .delete-modal-actions {
-      max-width: 31.2rem;
       z-index: 0;
       margin: auto;
       position: relative;
@@ -44,8 +43,9 @@
       }
 
       button {
-        width: 9rem;
-        height: 2.5rem;
+        height: 3rem;
+        width: 10rem;
+
         margin: 0.3rem;
         color: $white;
         font-size: 0.9rem;
@@ -54,19 +54,22 @@
         border-radius: 1.5rem;
 
         &.delete {
-          background-color: $error;
-          box-shadow: 0px 3px 5px -2px $error;
-          -moz-box-shadow: 0px 3px 5px -2px $error;
-          -webkit-box-shadow: 0px 3px 5px -2px $error;
+          background-color: transparent;
+          color: $error;
+          border: 2px solid $error;
         }
 
         &.cancel {
           border: $primary;
-          background-color: $primary;
+          background-color: $blue;
           color: white;
           box-shadow: 0px 3px 5px -2px $RGBAPrimary;
           -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
           -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+        }
+
+        &:focus {
+          outline: none;
         }
       }
     }
