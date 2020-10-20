@@ -13,7 +13,7 @@ export type ErrorsType = {
   general?: string;
   password?: string;
   email?: string;
-  handel?: string;
+  handle?: string;
   confirmPassword?: string;
   body?: string;
   comment?: string;
