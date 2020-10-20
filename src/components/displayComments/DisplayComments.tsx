@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { submitComment } from "../../redux/actions/dataActions";
 
 // component
-import AddComment from "../addComment/addComment";
+import AddComment from "../addComment/AddComment";
 
 type MyProps = {
   comments: ScreamComment[];
