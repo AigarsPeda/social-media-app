@@ -1,0 +1,64 @@
+.user {
+  .spinner {
+    text-align: center;
+  }
+
+  .grid-container {
+    margin-top: 0.6rem;
+    padding: 1rem;
+    background-color: $white;
+    border-radius: 1.5rem;
+    box-shadow: 0 3px 5px -2px $RGBAPrimary;
+    -moz-box-shadow: 0 3px 5px -2px $RGBAPrimary;
+    -webkit-box-shadow: 0 3px 5px -2px $RGBAPrimary;
+
+    @include media(">=tablet") {
+      display: grid;
+      grid-template-columns: 0.6fr 1.4fr;
+      gap: 0px 0px;
+      grid-template-areas: "image information";
+      padding: 1.6rem;
+    }
+
+    .image-container {
+      grid-area: image;
+
+      img {
+        border-radius: 50%;
+        width: 20rem;
+        height: 20rem;
+        object-fit: cover;
+      }
+    }
+
+    .information-container {
+      grid-area: information;
+      align-self: center;
+
+      @include media(">=tablet") {
+        margin-left: 3rem;
+      }
+
+      .fact {
+        padding-bottom: 1rem;
+
+        span {
+          font-size: 1.3rem;
+          font-weight: 500;
+          vertical-align: top;
+        }
+      }
+
+      .icon {
+        height: 2rem;
+        width: 2rem;
+        margin-right: 2rem;
+        fill: $primary;
+      }
+    }
+
+    .screams {
+      grid-area: screams;
+    }
+  }
+}
