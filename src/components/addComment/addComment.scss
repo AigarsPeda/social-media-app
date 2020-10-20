@@ -8,11 +8,12 @@
 
     input {
       display: block;
-      border: none;
-      border-bottom: 0.2rem solid $text;
+      border: 0.2rem solid $blue;
+      border-radius: 1rem;
       background: transparent;
       width: 95%;
-      height: 1.5rem;
+      height: 4rem;
+      padding-left: 1rem;
       margin: auto;
       font-size: 1rem;
       box-sizing: border-box;
@@ -41,11 +42,11 @@
       font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: 0.06rem;
-      height: 2.5rem;
-      width: 9.2rem;
+      background-color: $blue;
+      height: 3rem;
+      width: 10rem;
       border-radius: 1.5rem;
       border: none;
-      background-color: $primary;
       color: $white;
       margin-top: 2.1rem;
       margin-bottom: 2.1rem;
