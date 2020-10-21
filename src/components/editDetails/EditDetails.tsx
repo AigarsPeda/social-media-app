@@ -12,10 +12,6 @@ import { RootStateType } from "../../redux/store";
 import EditIcon from "../../images/EditIcon";
 import CancelIcon from "../../images/CancelIcon";
 
-// type MyProps = {
-//   setIsEditDetailsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-// };
-
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 const EditDetails: React.FC<Props> = (props) => {
@@ -39,7 +35,6 @@ const EditDetails: React.FC<Props> = (props) => {
 
   const handleCancel = () => {
     setToggle(false);
-    // setIsOpen(false);
 
     setTimeout(() => {
       setIsOpen(false);
