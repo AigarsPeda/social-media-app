@@ -9,10 +9,10 @@ import { RootStateType } from "../../redux/store";
 // icons
 import LogoIcon from "../../images/LogoIcon";
 import LogoutIcon from "../../images/LogoutIcon";
-import NotificationIcon from "../../images/NotificationIcon";
 
 // components
 import PostScream from "../postScream/PostScream";
+import Notifications from "../notifications/Notification";
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
@@ -27,9 +27,7 @@ const Navbar: React.FC<Props> = (props) => {
         {isAuthenticated ? (
           <div className="action-btn-container">
             <PostScream />
-            <button>
-              <NotificationIcon />
-            </button>
+            <Notifications />
             <button onClick={logOutUser}>
               <LogoutIcon />
             </button>
