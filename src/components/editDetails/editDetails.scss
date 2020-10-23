@@ -33,14 +33,14 @@
       max-width: 35rem;
       background-color: $white;
       border-radius: 1.5rem;
-      box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-      -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-      -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
 
+      // shadow variable in global.styles variables
+      @include shadow;
+
+      // animations variable in global.styles variables
       &.toggleIn {
         animation: slideDown 500ms;
       }
-
       &.toggleOut {
         animation: slideUp 500ms;
       }
@@ -105,51 +105,19 @@
             color: white;
             background-color: $error;
 
-            box-shadow: 0px 3px 5px -2px $error;
-            -moz-box-shadow: 0px 3px 5px -2px $error;
-            -webkit-box-shadow: 0px 3px 5px -2px $error;
+            // shadow variable in global.styles variables
+            @include shadow;
           }
 
           &.primary {
             background-color: $blue;
             color: white;
 
-            box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-            -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-            -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+            // shadow variable in global.styles variables
+            @include shadow;
           }
         }
       }
     }
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(-150%);
-  }
-}
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%);
-  }
-  50% {
-    transform: translateY(8%);
-  }
-  65% {
-    transform: translateY(-4%);
-  }
-  80% {
-    transform: translateY(4%);
-  }
-  95% {
-    transform: translateY(-2%);
-  }
-  100% {
-    transform: translateY(0%);
   }
 }
