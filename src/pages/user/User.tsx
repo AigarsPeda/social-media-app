@@ -55,7 +55,7 @@ const User: React.FC<Props> = (props) => {
         <div className="spinner">
           <Spinner />
         </div>
-      ) : screams.length ? (
+      ) : (
         <div>
           <div className="grid-container">
             <div className="image-container">
@@ -86,13 +86,17 @@ const User: React.FC<Props> = (props) => {
           </div>
 
           <div className="screams">
-            {screams.map((scream) => {
-              return <Scream scream={scream} key={scream.screamId} />;
-            })}
+            {screams.length ? (
+              screams.map((scream) => {
+                return <Scream scream={scream} key={scream.screamId} />;
+              })
+            ) : (
+              <div style={{ textAlign: "center", paddingTop: "1.5rem" }}>
+                <h1>{profile?.handle} doesn't have any screams yet! 😢</h1>
+              </div>
+            )}
           </div>
         </div>
-      ) : (
-        <p>No screams!</p>
       )}
     </div>
   );
