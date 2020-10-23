@@ -56,8 +56,13 @@ export type UserDataType = {
     screamId: string;
   }[];
   notifications: {
-    userHandle: string;
+    recipient: string;
+    sender: string;
+    createdAt: string;
     screamId: string;
+    type: "comment" | "like" | "";
+    read: boolean;
+    notificationId: string;
   }[];
 };
 
