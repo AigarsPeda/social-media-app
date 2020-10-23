@@ -20,8 +20,8 @@ import {
   SetDataTypes,
   SetErrorActionTypes,
   SetLoadingUITypes,
-  UNLIKE_LIKE_SCREAM,
-  SUBMIT_COMMENT
+  SUBMIT_COMMENT,
+  UNLIKE_LIKE_SCREAM
 } from "../types";
 import { getUserData } from "./userAction";
 
@@ -160,5 +160,26 @@ export const submitComment = (
         payload: err.response.data
       });
       console.error(err);
+    });
+};
+
+export const getUserProfile = (userHandle: string): DataActionThunk => (
+  dispatch
+) => {
+  dispatch({ type: IS_LOADING_DATA });
+  axios(`${BASE_URL}/user/${userHandle}`)
+    .then((res) => {
+      console.log("DATA ACTION: ", res.data.screams);
+      dispatch({
+        type: SET_SCREAMS,
+        payload: res.data.screams
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      dispatch({
+        type: SET_SCREAMS,
+        payload: null
+      });
     });
 };
