@@ -1,13 +1,14 @@
 import { isToken } from "../../helpers/isToken";
 import {
   AUTHENTICATE_USER,
-  SET_USER,
-  UNAUTHENTICATED_USER,
   AuthenticateActionTypes,
-  SetDataTypes,
-  LOADING_USER,
-  LOADED_USER,
   LIKE_SCREAM,
+  LOADED_USER,
+  LOADING_USER,
+  MARK_NOTIFICATIONS_RED,
+  SET_USER,
+  SetDataTypes,
+  UNAUTHENTICATED_USER,
   UNLIKE_LIKE_SCREAM
 } from "../types";
 import { UserDataType } from "../../types/types";
@@ -42,8 +43,13 @@ const initialState: IUserInitialState = {
     ],
     notifications: [
       {
-        userHandle: "",
-        screamId: ""
+        recipient: "",
+        sender: "",
+        createdAt: "",
+        screamId: "",
+        type: "",
+        read: false,
+        notificationId: ""
       }
     ]
   }
@@ -95,6 +101,23 @@ export default (
         likes: state.userData.likes.filter(
           (like) => like.screamId !== action.payload.screamId
         )
+      };
+    case MARK_NOTIFICATIONS_RED:
+      // return {
+      //   ...state,
+      //   userData: {
+      //     ...state.userData,
+      //     notifications: state.userData.notifications.forEach(
+      //       (not) => (not.read = true)
+      //     )
+      //   }
+      // };
+      return {
+        ...state,
+        ...state.userData,
+        notifications: state.userData.notifications.map((notification) => {
+          notification.read = true;
+        })
       };
     case UNAUTHENTICATED_USER:
       return initialState;
