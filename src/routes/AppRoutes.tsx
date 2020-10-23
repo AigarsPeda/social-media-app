@@ -18,6 +18,7 @@ import { logOutUser } from "../redux/actions/userAction";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import SignUp from "../pages/signup/SignUp";
+import User from "../pages/user/User";
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
@@ -40,6 +41,7 @@ const AppRoutes: React.FC<Props> = (props) => {
   return (
     <Switch>
       <AuthRoute exact path="/" component={Home} />
+      <AuthRoute exact path="/users/:handle" component={User} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={SignUp} />
     </Switch>
