@@ -29,10 +29,10 @@
       margin: auto;
       position: relative;
 
+      // animations variable in global.styles variables
       &.toggleIn {
         animation: slideFromLeft 500ms;
       }
-
       &.toggleOut {
         animation: slideToLeft 500ms;
       }
@@ -45,7 +45,6 @@
       button {
         height: 3rem;
         width: 10rem;
-
         margin: 0.3rem;
         color: $white;
         font-size: 0.9rem;
@@ -63,9 +62,9 @@
           border: $primary;
           background-color: $blue;
           color: white;
-          box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-          -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-          -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+
+          // shadow variable in global.styles variables
+          @include shadow;
         }
 
         &:focus {
@@ -73,39 +72,5 @@
         }
       }
     }
-  }
-}
-
-@keyframes slideToLeft {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-108px);
-    opacity: 0;
-  }
-}
-
-@keyframes slideFromLeft {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-
-  50% {
-    transform: translateX(8px);
-  }
-  65% {
-    transform: translateX(-4px);
-  }
-  80% {
-    transform: translateX(4px);
-  }
-  95% {
-    transform: translateX(-10px);
-  }
-  100% {
-    transform: translateX(0px);
-    opacity: 1;
   }
 }
