@@ -4,7 +4,8 @@ import { Route, Redirect } from "react-router-dom";
 import { RootStateType } from "../../redux/store";
 
 type propsFromRoute = {
-  component: React.FC;
+  // TODO: fix any error comes from AppRoutes.tsx <AuthRoute exact path="/users/:handle" component={User} />
+  component: React.FC | any;
   path: string;
   exact: boolean;
 };
