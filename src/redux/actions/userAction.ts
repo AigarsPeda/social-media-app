@@ -17,20 +17,21 @@ import {
   UserDetailsType
 } from "../../types/types";
 import {
-  UNAUTHENTICATED_USER,
   AUTHENTICATE_USER,
-  IS_LOADING_UI,
-  IS_LOADED_UI,
+  AuthenticateActionTypes,
+  CLEAR_DATA,
   CLEAR_ERROR,
+  IS_LOADED_UI,
+  IS_LOADING_UI,
+  LOADED_USER,
+  LOADING_USER,
+  MARK_NOTIFICATIONS_RED,
   SET_ERROR,
   SET_USER,
-  AuthenticateActionTypes,
+  SetDataTypes,
   SetErrorActionTypes,
   SetLoadingUITypes,
-  LOADING_USER,
-  LOADED_USER,
-  SetDataTypes,
-  CLEAR_DATA
+  UNAUTHENTICATED_USER
 } from "../types";
 
 type AppThunk<ReturnType = any> = ThunkAction<
@@ -79,7 +80,7 @@ export const logInUser = (userData: LoginUserType): AppThunk => async (
   }
 };
 
-// cerate new user
+// crate new user
 export const createUser = (newUserData: SignUserType): AppThunk => async (
   dispatch
 ) => {
@@ -157,9 +158,6 @@ export const uploadImage = (formData: FormData): AppThunk => (dispatch) => {
 export const editUserDetails = (userDetails: UserDetailsType): AppThunk => (
   dispatch
 ) => {
-  // dispatch({
-  //   type: LOADING_USER
-  // });
   axios
     .post(`${BASE_URL}/user`, userDetails)
     .then(() => {
@@ -172,6 +170,20 @@ export const editUserDetails = (userDetails: UserDetailsType): AppThunk => (
         type: LOADED_USER
       });
     });
+};
+
+export const markNotificationsRed = (notificationIds: string[]): AppThunk => (
+  dispatch
+) => {
+  axios
+    .post(`${BASE_URL}/notifications`, notificationIds)
+    .then((res) => {
+      console.log("RES: ", res);
+      dispatch({
+        type: MARK_NOTIFICATIONS_RED
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 // log out user
