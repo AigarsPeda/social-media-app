@@ -35,22 +35,14 @@
     }
 
     button {
-      cursor: pointer;
       display: block;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.06rem;
       background-color: $blue;
-      height: 3rem;
-      width: 10rem;
-      border-radius: 1.5rem;
-      border: none;
       color: $white;
       margin-top: 2.1rem;
       margin-bottom: 2.1rem;
 
-      // shadow variable in global.styles variables
+      // variable's in global.styles variables.scss
+      @include button;
       @include shadow;
 
       transition: all 0.3s ease-in-out;
