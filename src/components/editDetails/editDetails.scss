@@ -11,16 +11,13 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(63, 94, 251, 0.8);
-    background: linear-gradient(
-      180deg,
-      rgba(38, 74, 255, 0.8) 26%,
-      rgba(252, 70, 107, 0.6) 100%
-    );
     width: 100%;
     height: 100%;
     z-index: 15;
     text-align: -webkit-center;
+
+    // variable in global.styles variables.scss
+    @include background;
 
     form {
       text-align: left;
@@ -90,32 +87,14 @@
 
       .btn-container {
         text-align: right;
-        .btn {
-          cursor: pointer;
-          font-size: 0.9rem;
-          font-weight: 600;
-          letter-spacing: 0.07rem;
-          height: 3rem;
-          width: 10rem;
-          border-radius: 1.5rem;
+        button {
           margin-left: 0.3rem;
+          background-color: $blue;
+          color: white;
 
-          &.cancel {
-            border-color: $error;
-            color: white;
-            background-color: $error;
-
-            // shadow variable in global.styles variables
-            @include shadow;
-          }
-
-          &.primary {
-            background-color: $blue;
-            color: white;
-
-            // shadow variable in global.styles variables
-            @include shadow;
-          }
+          // variable's in global.styles variables.scss
+          @include button;
+          @include shadow;
         }
       }
     }
