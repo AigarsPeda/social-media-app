@@ -25,3 +25,14 @@ You will also see any lint errors in the console.
 ```bash
 npm run build
 ```
+
+## Screenshots
+
+![screenshots](./screenshot/2.png)
+![screenshots](./screenshot/1.png)
+![screenshots](./screenshot/3.png)
+![screenshots](./screenshot/4.png)
+![screenshots](./screenshot/5.png)
+![screenshots](./screenshot/6.png)
+![screenshots](./screenshot/7.png)
+![screenshots](./screenshot/8.png)
