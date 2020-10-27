@@ -113,9 +113,7 @@ const EditDetails: React.FC<Props> = (props) => {
               onChange={handleChange}
             />
             <div className="btn-container">
-              <button type="submit" className="btn primary">
-                Save
-              </button>
+              <button type="submit">Save</button>
             </div>
           </form>
         </div>
