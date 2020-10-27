@@ -27,13 +27,10 @@
     position: fixed;
     text-align: center;
     padding-top: 8.7rem;
-    background: rgba(63, 94, 251, 0.8);
-    background: linear-gradient(
-      180deg,
-      rgba(38, 74, 255, 0.8) 26%,
-      rgba(252, 70, 107, 0.6) 100%
-    );
     text-align: -webkit-center;
+
+    // variable in global.styles variables.scss
+    @include background;
 
     form {
       padding: 1.6rem 1.8rem 4rem 1.8rem;
@@ -41,14 +38,14 @@
       margin: 0.3rem;
       background-color: $white;
       border-radius: 25px;
-      box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-      -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-      -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
 
+      // shadow variable in global.styles variables
+      @include shadow;
+
+      // animations variable in global.styles variables
       &.toggleIn {
         animation: slideDown 500ms;
       }
-
       &.toggleOut {
         animation: slideUp 500ms;
       }
@@ -65,7 +62,8 @@
       textarea {
         font-size: 1.1rem;
         margin-bottom: 1rem;
-        border: 0.09rem solid $secondary;
+        border: 0.2rem solid $blue;
+        border-radius: 1rem;
         background: transparent;
         display: block;
         width: 99%;
@@ -93,56 +91,16 @@
         }
       }
 
-      button {
-        width: 7.2rem;
-        border-radius: 1.5rem;
-        height: 2.5rem;
-        color: $white;
-        font-size: 0.9rem;
-        font-weight: 600;
-        letter-spacing: 0.07rem;
+      .add-scream {
+        margin: 0;
+        margin-top: 1rem;
+        border: $primary;
+        background-color: $blue;
 
-        &.add-scream {
-          margin: 0;
-          margin-top: 1rem;
-          border: $primary;
-          background-color: $primary;
-
-          box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-          -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-          -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-        }
+        // variable's in global.styles variables.scss
+        @include button;
+        @include shadow;
       }
     }
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(-150%);
-  }
-}
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%);
-  }
-  50% {
-    transform: translateY(8%);
-  }
-  65% {
-    transform: translateY(-4%);
-  }
-  80% {
-    transform: translateY(4%);
-  }
-  95% {
-    transform: translateY(-2%);
-  }
-  100% {
-    transform: translateY(0%);
   }
 }
