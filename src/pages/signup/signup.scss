@@ -72,26 +72,17 @@
     }
 
     button {
-      cursor: pointer;
       display: block;
       margin-left: auto;
       margin-right: 0;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.06rem;
-      height: 2.5rem;
-      width: 7.2rem;
-      border-radius: 1.5rem;
-      border: none;
-      background-color: $primary;
+      background-color: $blue;
       color: $white;
       margin-top: 2.1rem;
       margin-bottom: 2.1rem;
 
-      box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-      -moz-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
-      -webkit-box-shadow: 0px 3px 5px -2px $RGBAPrimary;
+      // shadow variable in global.styles variables
+      @include button;
+      @include shadow;
 
       transition: all 0.3s ease-in-out;
 
