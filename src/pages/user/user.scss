@@ -8,9 +8,9 @@
     padding: 1rem;
     background-color: $white;
     border-radius: 1.5rem;
-    box-shadow: 0 3px 5px -2px $RGBAPrimary;
-    -moz-box-shadow: 0 3px 5px -2px $RGBAPrimary;
-    -webkit-box-shadow: 0 3px 5px -2px $RGBAPrimary;
+
+    // shadow variable in global.styles variables
+    @include shadow;
 
     @include media(">=tablet") {
       display: grid;
