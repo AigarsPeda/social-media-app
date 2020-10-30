@@ -53,7 +53,7 @@ const Scream: React.FC<Props> = (props) => {
     <div className="scream">
       <div className="scream-card">
         <div className="img-container">
-          <img src={userImage} />
+          <img src={userImage} alt="profile picture" />
         </div>
         <div className="content-container">
           <Link to={`/users/${userHandle}`} className="user-handle">
