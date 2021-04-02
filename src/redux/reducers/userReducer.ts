@@ -1,4 +1,5 @@
 import { isToken } from "../../helpers/isToken";
+
 import {
   AUTHENTICATE_USER,
   AuthenticateActionTypes,
