@@ -61,7 +61,7 @@ const Profile: React.FC<Props> = (props) => {
           </div>
 
           <div className="img-container">
-            <img src={user.imageUrl} />
+            <img src={require("../../images/Prof.jpeg")} />
             <input
               type="file"
               id="imageInput"
