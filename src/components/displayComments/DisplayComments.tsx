@@ -50,7 +50,7 @@ const DisplayComments: React.FC<Props> = (props) => {
             <div key={createdAt}>
               <section className="comments">
                 <div className="img-container">
-                  <img src={userImage} />
+                  <img src={require("../../images/Prof.jpeg")} />
                 </div>
                 <div className="content-container">
                   <Link to={`/users/${userHandle}`}>{userHandle}</Link>
