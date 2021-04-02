@@ -28,6 +28,10 @@ npm run build
 
 ## Screenshots
 
+<p align="center">
+  <img src="./screenshot/9.gif" width="800"/>
+</p>
+
 ![screenshots](./screenshot/2.png)
 ![screenshots](./screenshot/1.png)
 ![screenshots](./screenshot/3.png)
