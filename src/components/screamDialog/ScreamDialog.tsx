@@ -95,7 +95,7 @@ const ScreamDialog: React.FC<Props> = (props) => {
                 </div>
                 <div className="main">
                   <div className="scream-dialog-img">
-                    <img src={scream.userImage} />
+                    <img src={require("../../images/Prof.jpeg")} />
                   </div>
                   <div className="content-container">
                     <Link to={`/users/${scream.userHandle}`}>
