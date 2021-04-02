@@ -59,7 +59,10 @@ const User: React.FC<Props> = (props) => {
         <div>
           <div className="grid-container">
             <div className="image-container">
-              <img src={profile?.imageUrl} alt="users profile picture" />
+              <img
+                src={require("../../images/Prof.jpeg")}
+                alt="users profile picture"
+              />
             </div>
             <div className="information-container">
               <div className="fact">
